@@ -1,8 +1,9 @@
 const { default : mongose} = require('mongoose');
 
+
 const bddConnect = () => {
     try{
-        const connectionBdd = mongose.connect('mongodb://localhost:27017/IntranetEsisa');
+        const connectionBdd = mongose.connect(process.env.MONGODB_URL);
         console.log("connexion a la BDD avec succès XD");
 
     }
