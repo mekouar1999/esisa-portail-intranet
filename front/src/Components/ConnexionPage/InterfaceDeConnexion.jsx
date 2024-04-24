@@ -4,19 +4,22 @@ import styled from 'styled-components';
 import logo from '../../images/image.png'; // Import du logo
 import "./interfaceco.css"; // Import des styles CSS
 
+
 const ModalContainer = styled.div`
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: rgba(255, 255, 255, 0.9);
-  padding: 4rem; /* Augmentez la taille de la marge intérieure */
+  padding: 5rem 2rem; /* Padding général pour les appareils mobiles */
   border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Augmentez l'ombre */
-  z-index: 1000; /* Place la modal au premier plan */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+
+  @media (min-width: 768px) { /* Media Query pour les écrans de bureau */
+    padding: 5rem 15rem; /* Padding spécifique pour les écrans de bureau */
+  }
 `;
-
-
 const Overlay = styled.div`
   position: fixed;
   top: 0;
@@ -103,7 +106,7 @@ function InterfaceDeConnexion({ setIsLoggedIn }) {
       sessionStorage.setItem('isLoggedIn', true);
     } catch (error) {
       console.error('Error:', error);
-      setError('Invalid username or password.');
+      setError('Identifiant ou mot de passe incorrect');
     }
   };
 
@@ -115,7 +118,7 @@ function InterfaceDeConnexion({ setIsLoggedIn }) {
 
         <Form onSubmit={handleOnSubmit}>
           <InputWrapper>
-            <InputLabel>Username :</InputLabel>
+            <InputLabel>Identifiant :</InputLabel>
             <InputField
               type="text"
               name="username"
@@ -124,7 +127,7 @@ function InterfaceDeConnexion({ setIsLoggedIn }) {
             />
           </InputWrapper>
           <InputWrapper>
-            <InputLabel>Password :</InputLabel>
+            <InputLabel>Mot de passe :</InputLabel>
             <InputField
               type="password"
               name="password"
@@ -133,7 +136,7 @@ function InterfaceDeConnexion({ setIsLoggedIn }) {
             />
           </InputWrapper>
           {error && <ErrorMessage>{error}</ErrorMessage>}
-          <SubmitButton type="submit">OK</SubmitButton>
+          <SubmitButton type="submit">Se connecter</SubmitButton>
         </Form>
       </ModalContainer>
       <LogoImage src={logo} alt="Logo" />
