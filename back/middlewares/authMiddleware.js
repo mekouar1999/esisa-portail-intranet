@@ -1,4 +1,4 @@
-const User = require("../models/userModel");
+const User = require("../models/UserModel");
 const jwt = require("jsonwebtoken");
 const asyncHandler = require("express-async-handler");
 
@@ -28,7 +28,7 @@ const authMiddleware = asyncHandler(async (req, res, next) => {
 const isAdmin = asyncHandler(async (req, res, next) => {
   console.log("req.user", req.user);
   const { email } = req.user;
-  const adminUser = await User.findOne({ email });
+  const adminUser = await User.findOne({ NumCardId });
   if (adminUser.role !== "admin") {
     throw new Error("Vous n'etes pas un admin");
   } else {
