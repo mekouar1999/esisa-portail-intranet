@@ -4,7 +4,7 @@
 }
 
 .nav {
-  width: 200px;
+  width: 17%;
   background-color: #f0f0f0;
   padding: 20px;
 }
@@ -20,6 +20,7 @@
   transition: color 0.3s ease;
   padding: 10px 20px;
   border-radius: 5px;
+  text-align: center;
 }
 
 .nav-link.active {

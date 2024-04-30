@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FaEnvelope } from 'react-icons/fa';
 import './ContactezNous.css'; // Importation du fichier CSS
 
 const ContactezNous = () => {
@@ -26,77 +27,98 @@ const ContactezNous = () => {
   };
 
   return (
-    <div className="contact-container">
-      <form className="form" onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="subject">Sujet:</label>
-          <input
-            type="text"
-            id="subject"
-            name="subject"
-            value={formData.subject}
-            onChange={handleChange}
-            className="input"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="nom">Nom:</label>
-          <input
-            type="text"
-            id="nom"
-            name="nom"
-            value={formData.nom}
-            onChange={handleChange}
-            className="input"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="prenom">Prénom:</label>
-          <input
-            type="text"
-            id="prenom"
-            name="prenom"
-            value={formData.prenom}
-            onChange={handleChange}
-            className="input"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="classe">Classe:</label>
-          <input
-            type="text"
-            id="classe"
-            name="classe"
-            value={formData.classe}
-            onChange={handleChange}
-            className="input"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="groupe">Groupe:</label>
-          <input
-            type="text"
-            id="groupe"
-            name="groupe"
-            value={formData.groupe}
-            onChange={handleChange}
-            className="input"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="message">Message:</label>
-          <textarea
-            id="message"
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            rows="5"
-            className="textarea"
-          ></textarea>
-        </div>
-        <button type="submit" className="button">Envoyer</button>
-      </form>
-    </div>
+
+
+    <>
+    <div className="info-contact-container">
+      <div className="response-time">ESISA est là pour répondre à vos questions et vous accompagner. Nous nous engageons à vous fournir une assistance rapide et efficace. N'hésitez pas à nous contacter pour toute demande ou préoccupation, nous sommes là pour vous aider.</div>
+     
+  
+     
+     
+    
+      </div>
+
+
+    <div className="info-contact-container">
+
+<div className="modal-header">
+<FaEnvelope className="contact-icon" />
+<h2>Contactez-nous</h2>
+</div>
+<form className="form" onSubmit={handleSubmit}>
+<div className="form-group">
+  <input
+    type="text"
+    id="subject"
+    name="subject"
+    placeholder="Sujet"
+    value={formData.subject}
+    onChange={handleChange}
+    className="input"
+  />
+</div>
+<div className="form-group">
+  <input
+    type="text"
+    id="nom"
+    name="nom"
+    placeholder="Nom"
+    value={formData.nom}
+    onChange={handleChange}
+    className="input"
+  />
+</div>
+<div className="form-group">
+  <input
+    type="text"
+    id="prenom"
+    name="prenom"
+    placeholder="Prénom"
+    value={formData.prenom}
+    onChange={handleChange}
+    className="input"
+  />
+</div>
+<div className="form-group">
+  <input
+    type="text"
+    id="classe"
+    name="classe"
+    placeholder="Classe"
+    value={formData.classe}
+    onChange={handleChange}
+    className="input"
+  />
+</div>
+<div className="form-group">
+  <input
+    type="text"
+    id="groupe"
+    name="groupe"
+    placeholder="Groupe"
+    value={formData.groupe}
+    onChange={handleChange}
+    className="input"
+  />
+</div>
+<div className="form-group">
+  <textarea
+    id="message"
+    name="message"
+    placeholder="Message"
+    value={formData.message}
+    onChange={handleChange}
+    rows="5"
+    className="textarea"
+  ></textarea>
+</div>
+<div className="modal-buttons">
+  <button type="submit" className="button">Envoyer</button>
+</div>
+</form>
+</div>
+</>
   );
 };
 

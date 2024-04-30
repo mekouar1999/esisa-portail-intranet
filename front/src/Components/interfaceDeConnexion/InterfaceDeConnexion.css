@@ -21,6 +21,9 @@
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     z-index: 1000;
     text-align: center;
+
+    width: 45%;
+
   }
   
   .title {
@@ -73,10 +76,14 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    width: 12rem;
+    margin: 0 auto; /* Centrer horizontalement */
   }
+  
   
   .logo-image {
     width: 100%; 
     height: 100vh; 
     object-fit: cover; 
 }
+
