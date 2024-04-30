@@ -4,7 +4,14 @@ import './event.css';
 const Event = () => {
   return (
     <div className="event-container">
-      <h1 className="event-title">Événements à venir</h1>
+    
+    <div className="centered-content">
+  <h2 className="title">Événements à venir</h2>
+  <p className="description">
+    Pour toute demande d'affichage de votre événement ici, veuillez contacter l'équipe parascolaire.
+  </p>
+</div>
+
       <div className="event-card">
         <h2>ESISA ON AIR</h2>
         <p>Rencontrez les intervenants de l'événement ESISA ON AIR et découvrez les dernières tendances en matière de technologie.</p>

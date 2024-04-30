@@ -1,27 +1,53 @@
 /* InfoPersonnel.css */
 
 .info-personnel-container {
-    margin: 50px auto;
-    max-width: 600px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  }
-  
-  .info-title {
-    font-size: 2rem;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  .info-list {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .info-label {
-    font-weight: bold;
-    color: #555;
-  }
-  
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  width: 40%;
+
+}
+
+.info-1-container {
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+width: 10%;
+}
+
+.info-title {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.info-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.info-item {
+  font-size: 1rem;
+  color: #555;
+}
+
+.info-label {
+  font-weight: bold;
+}
+
+.flex{
+  display: flex;
+  flex-basis: 50%; /* Chaque élément occupe la moitié de la largeur */
+
+}

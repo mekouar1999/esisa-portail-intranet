@@ -7,6 +7,26 @@
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
+
+.medias-contact-container {
+  display: flex;
+  justify-content: center; /* Pour centrer horizontalement */
+  align-items: center; /* Pour centrer verticalement */
+  margin-top: 50px; /* Espacement depuis le haut */
+  max-width: 600px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  margin: 50px auto;
+
+}
+
+.centered-content {
+  text-align: center;
+  margin-bottom: 30px; /* Espacement entre le titre/description et les années */
+}
+
 .response-time {
   font-size: 0.9rem;
   color: #666;
@@ -33,6 +53,24 @@
 
 .contact-icon {
   /* Styles pour l'icône de contact */
+}
+
+
+
+.social-icons {
+  display: flex;
+  justify-content: space-around; /* Pour espacer équitablement les icônes */
+  width: 200px; /* Largeur souhaitée pour le conteneur des icônes */
+}
+
+.social-icon {
+  font-size: 24px; /* Taille de police des icônes */
+  color: #333; /* Couleur des icônes */
+  transition: color 0.3s ease; /* Transition de couleur au survol */
+}
+
+.social-icon:hover {
+  color: #007bff; /* Couleur des icônes au survol */
 }
 
 .form {

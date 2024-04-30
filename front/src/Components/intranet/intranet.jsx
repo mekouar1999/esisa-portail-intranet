@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { FaUser, FaEnvelope, FaFileAlt, FaBook, FaCalendarAlt, FaSignOutAlt } from 'react-icons/fa';
 import InfoPersonnel from './IntranetSousSection/InfoPersonnel/InfoPersonnel';
 import ContactezNous from './IntranetSousSection/ContactezNous/contactezNous';
-import AttestationScolarite from './IntranetSousSection/Inscriptions/Inscriptions';
+import AttestationScolarite from './IntranetSousSection/attestationScolarite/AttestationScolarite';
 import ReleveDeNotes from './IntranetSousSection/RelevedeNotes/relevedeNotes';
 import Event from './IntranetSousSection/Events/event';
-import Bulletins from './IntranetSousSection/Bulletins/bulletins';
 import './intranet.css'; 
+import EmploiDuTemps from './IntranetSousSection/EmploiduTemps/emploidutemps';
 
 const Intranet = () => {
   const [selectedComponent, setSelectedComponent] = useState("infoPersonnel");
@@ -44,8 +44,8 @@ const Intranet = () => {
     case "releveDeNotes":
       componentToDisplay = <ReleveDeNotes />;
       break;
-    case "bulletins":
-      componentToDisplay = <Bulletins />;
+    case "emploidutemps":
+      componentToDisplay = <EmploiDuTemps />;
       break;
     case "evenements":
       componentToDisplay = <Event />;
@@ -57,11 +57,11 @@ const Intranet = () => {
   return (
     <div className="intranet-container">
       <nav className="nav">
-        <div onClick={() => handleComponentChange("infoPersonnel")} className={`nav-link ${selectedComponent === "infoPersonnel" && "active"}`}>
+        <div onClick={() => handleComponentChange("infoPersonnel")} className={`sub-nav-link ${selectedComponent === "infoPersonnel" && "active"}`}>
           <FaUser className="nav-icon" />
           <span className="nav-text">Informations </span>
         </div>
-        <div onClick={() => handleComponentChange("contactezNous")} className={`nav-link ${selectedComponent === "contactezNous" && "active"}`}>
+        <div onClick={() => handleComponentChange("contactezNous")} className={`sub-nav-link ${selectedComponent === "contactezNous" && "active"}`}>
           <FaEnvelope className="nav-icon" />
           <span className="nav-text">Nous contacter</span>
         </div>
@@ -74,9 +74,9 @@ const Intranet = () => {
             <FaBook className="sub-nav-icon" />
             <span className="sub-nav-text">Relevé de notes</span>
           </div>
-          <div onClick={() => handleComponentChange("bulletins")} className={`sub-nav-link ${selectedComponent === "bulletins" && "active"}`}>
+          <div onClick={() => handleComponentChange("emploidutemps")} className={`sub-nav-link ${selectedComponent === "emploidutemps" && "active"}`}>
             <FaCalendarAlt className="sub-nav-icon" />
-            <span className="sub-nav-text">Bulletins</span>
+            <span className="sub-nav-text">Emplois du temps</span>
           </div>
           <div onClick={() => handleComponentChange("evenements")} className={`sub-nav-link ${selectedComponent === "evenements" && "active"}`}>
             <FaCalendarAlt className="sub-nav-icon" />

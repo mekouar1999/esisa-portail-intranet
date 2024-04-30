@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FaEnvelope } from 'react-icons/fa';
 import './ContactezNous.css'; // Importation du fichier CSS
+import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
 
 const ContactezNous = () => {
   const [formData, setFormData] = useState({
@@ -30,6 +31,14 @@ const ContactezNous = () => {
 
 
     <>
+
+
+    <div className="centered-content">
+      <h2 className="title">Contact ESISA SUPPORT</h2>
+      <p className="description">
+        Service disponible 24/24 7/7
+      </p>
+    </div>
     <div className="info-contact-container">
       <div className="response-time">ESISA est là pour répondre à vos questions et vous accompagner. Nous nous engageons à vous fournir une assistance rapide et efficace. N'hésitez pas à nous contacter pour toute demande ou préoccupation, nous sommes là pour vous aider.</div>
      
@@ -118,6 +127,23 @@ const ContactezNous = () => {
 </div>
 </form>
 </div>
+
+
+ 
+<div className="medias-contact-container">
+  <div className="social-icons">
+    <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer"><FaFacebook className="social-icon" /></a>
+    <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer"><FaTwitter className="social-icon" /></a>
+    <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer"><FaInstagram className="social-icon" /></a>
+    <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer"><FaLinkedin className="social-icon" /></a>
+  </div>
+</div>
+
+     
+     
+    
+ 
+
 </>
   );
 };
