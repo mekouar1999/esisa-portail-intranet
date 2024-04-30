@@ -1,0 +1,46 @@
+/* Intranet.css */
+
+.intranet-container {
+    display: flex;
+    height: 100vh;
+  }
+  
+  .nav {
+    width: 200px;
+    background-color: #f0f0f0;
+    padding: 20px;
+  }
+  
+  .nav-link {
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .nav-link.active {
+    color: blue;
+  }
+  
+  .sub-nav {
+    margin-top: 20px;
+  }
+  
+  .sub-nav-link {
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .sub-nav-link.active {
+    color: blue;
+  }
+  
+  .content {
+    flex: 1;
+    padding: 20px;
+  }
+  

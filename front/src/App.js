@@ -1,15 +1,12 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
-import InterfaceDeConnexion from './Components/ConnexionPage/InterfaceDeConnexion';
+import AppRoutes from './Routes';
 
 function App() {
   return (
-
-
-  <div>
-    <InterfaceDeConnexion/>
-
-  </div>
+    <div>
+      <AppRoutes />
+    </div>
   );
 }
 
