@@ -7,7 +7,7 @@ import Intranet from './Components/intranet/intranet';
 function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" exact element={<InterfaceDeConnexion />} />
+      <Route path="/login" exact element={<InterfaceDeConnexion />} />
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/intranet" element={<Intranet />} />
 

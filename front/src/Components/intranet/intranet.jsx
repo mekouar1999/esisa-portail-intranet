@@ -1,15 +1,33 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; 
+import { FaUser, FaEnvelope, FaFileAlt, FaBook, FaCalendarAlt, FaSignOutAlt } from 'react-icons/fa';
 import InfoPersonnel from './IntranetSousSection/InfoPersonnel/InfoPersonnel';
 import ContactezNous from './IntranetSousSection/ContactezNous/contactezNous';
 import AttestationScolarite from './IntranetSousSection/Inscriptions/Inscriptions';
 import ReleveDeNotes from './IntranetSousSection/RelevedeNotes/relevedeNotes';
-import './intranet.css'; // Importation du fichier CSS
+import Event from './IntranetSousSection/Events/event';
+import Bulletins from './IntranetSousSection/Bulletins/bulletins';
+import './intranet.css'; 
 
 const Intranet = () => {
   const [selectedComponent, setSelectedComponent] = useState("infoPersonnel");
+  const [showLogoutModal, setShowLogoutModal] = useState(false); // State pour afficher ou masquer la modal de déconnexion
+  const navigate = useNavigate(); 
 
   const handleComponentChange = (component) => {
     setSelectedComponent(component);
+  };
+
+  const handleLogout = () => {
+    setShowLogoutModal(true); // Afficher la modal de déconnexion
+  };
+
+  const confirmLogout = () => {
+    navigate('/login');
+  };
+
+  const cancelLogout = () => {
+    setShowLogoutModal(false); // Masquer la modal de déconnexion
   };
 
   let componentToDisplay;
@@ -26,6 +44,12 @@ const Intranet = () => {
     case "releveDeNotes":
       componentToDisplay = <ReleveDeNotes />;
       break;
+    case "bulletins":
+      componentToDisplay = <Bulletins />;
+      break;
+    case "evenements":
+      componentToDisplay = <Event />;
+      break;
     default:
       componentToDisplay = <InfoPersonnel />;
   }
@@ -33,16 +57,50 @@ const Intranet = () => {
   return (
     <div className="intranet-container">
       <nav className="nav">
-        <div onClick={() => handleComponentChange("infoPersonnel")} className={`nav-link ${selectedComponent === "infoPersonnel" && "active"}`}>Informations personnelles</div>
-        <div onClick={() => handleComponentChange("contactezNous")} className={`nav-link ${selectedComponent === "contactezNous" && "active"}`}>Nous contacter</div>
+        <div onClick={() => handleComponentChange("infoPersonnel")} className={`nav-link ${selectedComponent === "infoPersonnel" && "active"}`}>
+          <FaUser className="nav-icon" />
+          <span className="nav-text">Informations </span>
+        </div>
+        <div onClick={() => handleComponentChange("contactezNous")} className={`nav-link ${selectedComponent === "contactezNous" && "active"}`}>
+          <FaEnvelope className="nav-icon" />
+          <span className="nav-text">Nous contacter</span>
+        </div>
         <div className="sub-nav">
-          <div onClick={() => handleComponentChange("attestationScolarite")} className={`sub-nav-link ${selectedComponent === "attestationScolarite" && "active"}`}>Attestation de scolarité</div>
-          <div onClick={() => handleComponentChange("releveDeNotes")} className={`sub-nav-link ${selectedComponent === "releveDeNotes" && "active"}`}>Relevé de notes</div>
+          <div onClick={() => handleComponentChange("attestationScolarite")} className={`sub-nav-link ${selectedComponent === "attestationScolarite" && "active"}`}>
+            <FaFileAlt className="sub-nav-icon" />
+            <span className="sub-nav-text">Attestations</span>
+          </div>
+          <div onClick={() => handleComponentChange("releveDeNotes")} className={`sub-nav-link ${selectedComponent === "releveDeNotes" && "active"}`}>
+            <FaBook className="sub-nav-icon" />
+            <span className="sub-nav-text">Relevé de notes</span>
+          </div>
+          <div onClick={() => handleComponentChange("bulletins")} className={`sub-nav-link ${selectedComponent === "bulletins" && "active"}`}>
+            <FaCalendarAlt className="sub-nav-icon" />
+            <span className="sub-nav-text">Bulletins</span>
+          </div>
+          <div onClick={() => handleComponentChange("evenements")} className={`sub-nav-link ${selectedComponent === "evenements" && "active"}`}>
+            <FaCalendarAlt className="sub-nav-icon" />
+            <span className="sub-nav-text">Événements</span>
+          </div>
+          <div onClick={handleLogout} className={`sub-nav-link`}>
+            <FaSignOutAlt className="sub-nav-icon" />
+            <span className="sub-nav-text">Déconnexion</span>
+          </div>
         </div>
       </nav>
       <div className="content">
         {componentToDisplay}
       </div>
+      {/* Modal de confirmation de déconnexion */}
+      {showLogoutModal && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <h2>Voulez-vous vraiment vous déconnecter ?</h2>
+            <button onClick={confirmLogout}>Oui</button>
+            <button onClick={cancelLogout}>Annuler</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

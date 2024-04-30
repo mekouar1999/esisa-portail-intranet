@@ -1,0 +1,49 @@
+/* event.css */
+
+.event-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center; /* Centrer le contenu */
+  }
+  
+  .event-title {
+    color: #333;
+    margin-bottom: 3rem;
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: uppercase; 
+    
+  }
+  
+  .event-card {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .event-card h2 {
+    color: #333;
+  }
+  
+  .event-card p {
+    color: #666;
+    margin-bottom: 10px;
+  }
+  
+  .event-card button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .event-card button:hover {
+    background-color: #0056b3;
+  }
+  
