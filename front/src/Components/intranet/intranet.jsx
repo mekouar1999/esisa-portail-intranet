@@ -76,7 +76,7 @@ const Intranet = () => {
           </div>
           <div onClick={() => handleComponentChange("emploidutemps")} className={`sub-nav-link ${selectedComponent === "emploidutemps" && "active"}`}>
             <FaCalendarAlt className="sub-nav-icon" />
-            <span className="sub-nav-text">Emplois du temps</span>
+            <span className="sub-nav-text">EDT</span>
           </div>
           <div onClick={() => handleComponentChange("evenements")} className={`sub-nav-link ${selectedComponent === "evenements" && "active"}`}>
             <FaCalendarAlt className="sub-nav-icon" />
