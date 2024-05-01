@@ -16,6 +16,7 @@
   
   .emploi-du-temps-image:hover {
     transform: scale(1.05); /* Agrandir légèrement l'image au survol */
+    cursor: pointer;
   }
   
 .title {
@@ -72,11 +73,12 @@ ul li:last-child {
     border-radius: 10px;
     transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Ajout de la transition pour l'ombre portée */
     margin-bottom: 1rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ajout de l'ombre portée */
-  }
+    box-shadow: 3px 5px 9px 7px rgba(0, 0, 0, 0.2);
+margin-bottom: 2rem;  }
   
   .anneeedt-link:hover {
     background-color: #00223c;
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Augmentation de l'ombre portée au survol */
   }
   
+

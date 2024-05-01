@@ -28,15 +28,23 @@ function InterfaceDeConnexion({ setIsLoggedIn }) {
         formData
       );
       console.log('Response from server:', response); // Log de la réponse du serveur
-      if (response.data && response.data.token) {
-        setIsLoggedIn(true);
-        setFormData({
-          NumCardId: '',
-          password: '',
-        });
-        sessionStorage.setItem('isLoggedIn', true);
-        navigate('/intranet');
-      } else {
+     
+      // Après la vérification de l'identifiant et du mot de passe
+if (response.data && response.data.token) {
+  setIsLoggedIn(true);
+  setFormData({
+    NumCardId: '',
+    password: '',
+  });
+  // Stocke le token dans sessionStorage
+  sessionStorage.setItem('token', response.data.token);
+  sessionStorage.setItem('_id', response.data._id);
+
+  sessionStorage.setItem('isLoggedIn', true);
+  navigate('/intranet');
+}
+
+else {
         setError('Identifiant ou mot de passe incorrect');
       }
     } catch (error) {

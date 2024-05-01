@@ -15,14 +15,37 @@
     text-transform: uppercase; 
     
   }
-  
   .event-card {
+    position: relative;
+    margin-top: 20px; /* Ajout de marge en haut pour séparer les cartes */
+    padding: 20px;
     background-color: #f9f9f9;
     border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   }
+  
+  .validation-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #28a745; /* Couleur verte pour l'icône de validation */
+  }
+  
+  .validation-icon svg {
+    font-size: 24px; /* Taille de l'icône */
+  }
+  /* event.css */
+
+.modal-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px; /* Bordures arrondies */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre douce */
+  object-fit: cover; /* Ajustement de la taille de l'image */
+  margin-bottom: 3rem;
+  margin-top: 1rem;
+}
+
   
   .event-card h2 {
     color: #333;
@@ -47,3 +70,5 @@
     background-color: #0056b3;
   }
   
+
+

@@ -14,6 +14,8 @@ const Intranet = () => {
   const [showLogoutModal, setShowLogoutModal] = useState(false); // State pour afficher ou masquer la modal de déconnexion
   const navigate = useNavigate(); 
 
+  
+
   const handleComponentChange = (component) => {
     setSelectedComponent(component);
   };
@@ -23,8 +25,14 @@ const Intranet = () => {
   };
 
   const confirmLogout = () => {
+    // Supprimer toutes les données du localStorage
+    localStorage.clear();
+    // Supprimer toutes les données du sessionStorage
+    sessionStorage.clear();
+    // Rediriger vers la page de connexion
     navigate('/login');
   };
+  
 
   const cancelLogout = () => {
     setShowLogoutModal(false); // Masquer la modal de déconnexion
