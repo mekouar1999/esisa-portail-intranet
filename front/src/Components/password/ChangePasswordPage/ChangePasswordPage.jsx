@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom'; // Importer le hook useParams
+import { useParams } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import './ChangePasswordPage.css'; 
 
 function ChangePasswordPage() {
@@ -8,17 +11,12 @@ function ChangePasswordPage() {
     password: '',
     confirmPassword: '',
   });
-  const [message, setMessage] = useState('');
   const [error, setError] = useState('');
-  const { token } = useParams(); // Récupérer le token de l'URL
-
-  useEffect(() => {
-    console.log("Token:", token); // Log du token
-  }, [token]); // Effectuer le log lorsque le token change
+  const { token } = useParams();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevState) => ({
+    setFormData(prevState => ({
       ...prevState,
       [name]: value,
     }));
@@ -27,12 +25,29 @@ function ChangePasswordPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios.put(`http://localhost:4000/api/user/reset-Password/${token}`, formData)
-    .then(response => {
-        setMessage(response.data.message);
+      .then(response => {
+        toast.success('Mot de passe changé avec succès !'); // Afficher la notification de succès
       })
       .catch(error => {
-        // Gérer les erreurs ici
-        console.error(error);
+        if (error.response) {
+          // La requête a été faite et le serveur a répondu avec un code d'erreur
+          const responseData = error.response.data;
+          if (responseData.status === "fail") {
+            // Cas où l'utilisateur n'est pas trouvé
+            setError(responseData.message);
+          } else {
+            // Gestion d'autres erreurs du serveur
+            setError('Une erreur s\'est produite lors de la réinitialisation du mot de passe.');
+          }
+        } else if (error.request) {
+          // La requête a été faite mais aucune réponse n'a été reçue
+          console.error(error.request);
+          setError('Aucune réponse du serveur.');
+        } else {
+          // Une erreur s'est produite lors de la configuration de la requête
+          console.error('Error', error.message);
+          setError('Une erreur s\'est produite lors de la configuration de la requête.');
+        }
       });
   };
 
@@ -66,9 +81,10 @@ function ChangePasswordPage() {
             />
           </div>
           <button type="submit" className="Button">Changer le mot de passe</button>
-          {message && <p className={error ? 'Message error' : 'Message'}>{message}</p>}
+          {error && <p className="Message error">{error}</p>}
         </form>
       </div>
+      <ToastContainer /> {/* Container pour les notifications */}
     </div>
   );
 }

@@ -27,6 +27,7 @@ function InterfaceDeConnexion({ setIsLoggedIn }) {
         'http://localhost:4000/api/user/login',
         formData
       );
+      console.log('Response from server:', response); // Log de la réponse du serveur
       if (response.data && response.data.token) {
         setIsLoggedIn(true);
         setFormData({
@@ -39,8 +40,15 @@ function InterfaceDeConnexion({ setIsLoggedIn }) {
         setError('Identifiant ou mot de passe incorrect');
       }
     } catch (error) {
-      setError('Identifiant ou mot de passe incorrect');
-      navigate('/intranet');
+      console.error('Error during login:', error); // Log de l'erreur survenue lors de la connexion
+      if (error.response && error.response.data) {
+        // Si le backend a renvoyé un message d'erreur spécifique
+        console.error('Error response from server:', error.response); // Log de la réponse d'erreur du serveur
+        setError(error.response.data.message);
+      } else {
+        // Si une erreur s'est produite mais aucun message d'erreur spécifique n'a été retourné
+        setError('Une erreur s\'est produite lors de la connexion.');
+      }
     }
   };
 
