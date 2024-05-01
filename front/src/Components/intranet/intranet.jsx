@@ -6,15 +6,14 @@ import ContactezNous from './IntranetSousSection/ContactezNous/contactezNous';
 import AttestationScolarite from './IntranetSousSection/attestationScolarite/AttestationScolarite';
 import ReleveDeNotes from './IntranetSousSection/RelevedeNotes/relevedeNotes';
 import Event from './IntranetSousSection/Events/event';
+import Documents from './IntranetSousSection/documents/documents'; 
 import './intranet.css'; 
 import EmploiDuTemps from './IntranetSousSection/EmploiduTemps/emploidutemps';
 
 const Intranet = () => {
   const [selectedComponent, setSelectedComponent] = useState("infoPersonnel");
-  const [showLogoutModal, setShowLogoutModal] = useState(false); // State pour afficher ou masquer la modal de déconnexion
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
   const navigate = useNavigate(); 
-
-  
 
   const handleComponentChange = (component) => {
     setSelectedComponent(component);
@@ -32,7 +31,6 @@ const Intranet = () => {
     // Rediriger vers la page de connexion
     navigate('/login');
   };
-  
 
   const cancelLogout = () => {
     setShowLogoutModal(false); // Masquer la modal de déconnexion
@@ -55,6 +53,9 @@ const Intranet = () => {
     case "emploidutemps":
       componentToDisplay = <EmploiDuTemps />;
       break;
+    case "documents":
+      componentToDisplay = <Documents />;
+      break; // Ajout du cas "documents"
     case "evenements":
       componentToDisplay = <Event />;
       break;
@@ -85,6 +86,10 @@ const Intranet = () => {
           <div onClick={() => handleComponentChange("emploidutemps")} className={`sub-nav-link ${selectedComponent === "emploidutemps" && "active"}`}>
             <FaCalendarAlt className="sub-nav-icon" />
             <span className="sub-nav-text">EDT</span>
+          </div>
+          <div onClick={() => handleComponentChange("documents")} className={`sub-nav-link ${selectedComponent === "documents" && "active"}`}> {/* Ajout de la gestion de la section Documents */}
+            <FaFileAlt className="sub-nav-icon" />
+            <span className="sub-nav-text">Documents</span>
           </div>
           <div onClick={() => handleComponentChange("evenements")} className={`sub-nav-link ${selectedComponent === "evenements" && "active"}`}>
             <FaCalendarAlt className="sub-nav-icon" />
