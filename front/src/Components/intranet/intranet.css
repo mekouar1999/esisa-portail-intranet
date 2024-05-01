@@ -130,3 +130,11 @@
 .modal button:last-child:hover {
   background-color: #c82333;
 }
+
+
+.nomPersMenu{
+  text-align: center;
+    margin-bottom: 4rem;
+    margin-top: 3rem;
+    color: #0c0c5b;
+}

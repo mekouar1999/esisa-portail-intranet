@@ -39,6 +39,8 @@ if (response.data && response.data.token) {
   // Stocke le token dans sessionStorage
   sessionStorage.setItem('token', response.data.token);
   sessionStorage.setItem('_id', response.data._id);
+  sessionStorage.setItem('firstname', response.data.firstname);
+
 
   sessionStorage.setItem('isLoggedIn', true);
   navigate('/intranet');

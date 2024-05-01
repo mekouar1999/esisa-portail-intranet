@@ -13,7 +13,9 @@ import EmploiDuTemps from './IntranetSousSection/EmploiduTemps/emploidutemps';
 const Intranet = () => {
   const [selectedComponent, setSelectedComponent] = useState("infoPersonnel");
   const [showLogoutModal, setShowLogoutModal] = useState(false);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
+  const firstName = sessionStorage.getItem('firstname'); 
+  console.log(firstName)
 
   const handleComponentChange = (component) => {
     setSelectedComponent(component);
@@ -66,6 +68,8 @@ const Intranet = () => {
   return (
     <div className="intranet-container">
       <nav className="nav">
+        <h2 className='nomPersMenu'>Bonjour {firstName} !</h2>
+
         <div onClick={() => handleComponentChange("infoPersonnel")} className={`sub-nav-link ${selectedComponent === "infoPersonnel" && "active"}`}>
           <FaUser className="nav-icon" />
           <span className="nav-text">Informations </span>
@@ -85,7 +89,7 @@ const Intranet = () => {
           </div>
           <div onClick={() => handleComponentChange("emploidutemps")} className={`sub-nav-link ${selectedComponent === "emploidutemps" && "active"}`}>
             <FaCalendarAlt className="sub-nav-icon" />
-            <span className="sub-nav-text">EDT</span>
+            <span className="sub-nav-text">Emplois du temps</span>
           </div>
           <div onClick={() => handleComponentChange("documents")} className={`sub-nav-link ${selectedComponent === "documents" && "active"}`}> {/* Ajout de la gestion de la section Documents */}
             <FaFileAlt className="sub-nav-icon" />
