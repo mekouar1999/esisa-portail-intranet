@@ -26,12 +26,25 @@
     border-radius: 5px;
     transition: background-color 0.3s ease;
   }
+
+  .semester-image {
+    width: 20rem; /* Ajustez la largeur selon vos besoins */
+    height: 20rem; /* Ajustez la hauteur selon vos besoins */
+    border-radius: 10%; /* Pour rendre l'image ronde */
+    border: 2px solid #012448; /* Couleur de la bordure */
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    transition: transform 0.3s ease; /* Effet de transition */
+  }
+  
+  .semester-image:hover {
+    transform: scale(1.1); /* Zoom léger au survol */
+  }
+  
   
   .download-link:hover {
     background-color: #0056b3;
   }
   
-
   ul{
     display: flex;
 justify-content: space-around; 
