@@ -1,6 +1,8 @@
+
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
-import { FaUser, FaEnvelope, FaFileAlt, FaBook, FaCalendarAlt, FaSignOutAlt } from 'react-icons/fa';
+import { FaUser, FaEnvelope, FaFileAlt, FaBook, FaCalendarAlt, FaSignOutAlt, FaBars } from 'react-icons/fa'; // Ajout de l'icône FaBars
 import InfoPersonnel from './IntranetSousSection/InfoPersonnel/InfoPersonnel';
 import ContactezNous from './IntranetSousSection/ContactezNous/contactezNous';
 import AttestationScolarite from './IntranetSousSection/attestationScolarite/AttestationScolarite';
@@ -13,29 +15,27 @@ import EmploiDuTemps from './IntranetSousSection/EmploiduTemps/emploidutemps';
 const Intranet = () => {
   const [selectedComponent, setSelectedComponent] = useState("infoPersonnel");
   const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const [showNav, setShowNav] = useState(false); // Ajout de l'état local pour contrôler l'affichage de la navigation
   const navigate = useNavigate();
   const firstName = sessionStorage.getItem('firstname'); 
-  console.log(firstName)
 
   const handleComponentChange = (component) => {
     setSelectedComponent(component);
+    setShowNav(false); // Fermer la navigation sur le changement de composant
   };
 
   const handleLogout = () => {
-    setShowLogoutModal(true); // Afficher la modal de déconnexion
+    setShowLogoutModal(true);
   };
 
   const confirmLogout = () => {
-    // Supprimer toutes les données du localStorage
     localStorage.clear();
-    // Supprimer toutes les données du sessionStorage
     sessionStorage.clear();
-    // Rediriger vers la page de connexion
     navigate('/login');
   };
 
   const cancelLogout = () => {
-    setShowLogoutModal(false); // Masquer la modal de déconnexion
+    setShowLogoutModal(false);
   };
 
   let componentToDisplay;
@@ -57,7 +57,7 @@ const Intranet = () => {
       break;
     case "documents":
       componentToDisplay = <Documents />;
-      break; // Ajout du cas "documents"
+      break;
     case "evenements":
       componentToDisplay = <Event />;
       break;
@@ -67,9 +67,12 @@ const Intranet = () => {
 
   return (
     <div className="intranet-container">
-      <nav className="nav">
+      <nav className={`nav ${showNav ? 'show' : ''}`}> {/* Ajout de la classe show pour afficher la navigation sur les appareils mobiles */}
+        <FaBars className="toggle-nav" onClick={() => setShowNav(!showNav)} /> {/* Toggle pour afficher/cacher la navigation sur les appareils mobiles */}
         <h2 className='nomPersMenu'>Bonjour {firstName} !</h2>
 
+        {/* Les éléments de navigation restent inchangés */}
+       
         <div onClick={() => handleComponentChange("infoPersonnel")} className={`sub-nav-link ${selectedComponent === "infoPersonnel" && "active"}`}>
           <FaUser className="nav-icon" />
           <span className="nav-text">Informations </span>

@@ -140,3 +140,50 @@
     margin-top: 3rem;
     color: #0c0c5b;
 }
+
+/* Ajout de styles pour les appareils mobiles */
+
+@media (max-width: 768px) {
+  .nav {
+    position: fixed;
+    top: 0;
+    left: -300px; /* Déplacer la navigation hors de l'écran */
+    width: 250px;
+    height: 100%;
+    background-color: #f0f0f0;
+    padding: 20px;
+    transition: left 0.3s ease; /* Animation pour afficher/cacher la navigation */
+    z-index: 100; /* Assure que la navigation est au-dessus du contenu */
+  }
+
+  .nav.show {
+    left: 0; /* Afficher la navigation lorsqu'elle est ouverte */
+  }
+
+  .toggle-nav {
+    display: block;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 101; /* Assure que le toggle est au-dessus de la navigation */
+  }
+
+  /* Ajout d'un overlay pour masquer le contenu lorsque la navigation est ouverte */
+  .overlay {
+    display: none; /* Masquer l'overlay par défaut */
+  }
+
+  .nav.show + .overlay {
+    display: block; /* Afficher l'overlay lorsque la navigation est ouverte */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+    z-index: 99; /* Assure que l'overlay est sous la navigation */
+  }
+}
+
