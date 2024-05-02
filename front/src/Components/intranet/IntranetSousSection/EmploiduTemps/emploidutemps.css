@@ -29,13 +29,12 @@
     font-size: 1.2rem;
     color: #666;
     line-height: 1.6;
-    margin-bottom: 5rem;
 }
 
 .download-link {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #003366;
+    background-color: #3f9fff;
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
@@ -44,6 +43,26 @@
 
 .download-link:hover {
     background-color: #001a33;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    margin-bottom: 10px;
+
+}
+
+@media screen and (max-width:500px) {
+    
+    ul {
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+        margin-bottom: 10px;
+        display: block;
+    
+    }
 }
 
 ul {
@@ -81,4 +100,66 @@ margin-bottom: 2rem;  }
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Augmentation de l'ombre portée au survol */
   }
   
+
+
+  @media (max-width: 768px){
+
+  
+.download-link {
+    width: 55%;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+}
+
+  }
+
+
+  @media (max-width: 500px){
+
+  
+    .anneeedt-link {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #ffffff;
+        color: #002353;
+        font-weight: bold;
+        font-size: 15px;
+        text-decoration: none;
+        border-radius: 10px;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        margin-bottom: 1rem;
+        /* box-shadow: 3px 5px 9px 7px rgba(0, 0, 0, 0.2); */
+        /* margin-bottom: 2rem; */
+        width: 82%;
+    }
+    
+      }
+
+
+
+      @media screen and (min-width: 770px) and (max-width: 1100px){
+
+  
+      
+        .anneeedt-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #ffffff;
+            color: #002353;
+            font-weight: bold;
+            font-size: 15px;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 1.5rem;
+            box-shadow: 3px 5px 9px 7px rgba(0, 0, 0, 0.2);
+            margin-left: 1.5rem;
+            margin-right: 1rem;
+        }
+    
+        
+          }
+    
+
+
 

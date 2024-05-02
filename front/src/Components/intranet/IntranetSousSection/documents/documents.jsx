@@ -45,11 +45,14 @@ const UploadPage = () => {
     
 <>
 
+<div className="centered-content">
+        <h2 className="title">Documents universitaires</h2>
+        <p className="description">
+        Mettez à jour vos documents en cliquant sur les liens ci-dessous :
+        </p>
+      </div>
 
-<h2 className="title">Documents universitaires</h2>
-<p className="description">
-  Mettez à jour vos documents en cliquant sur les liens ci-dessous :
-</p>
+
 
 <div className="upload-page-container">
       <div className="file-inputs">

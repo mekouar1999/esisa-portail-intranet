@@ -5,7 +5,6 @@
 /* Container principal */
 .attestation-container {
   text-align: center;
-  padding: 20px;
 }
 
 /* Titre */
@@ -50,7 +49,8 @@
 }
 
 /* Styles spécifiques pour les écrans de petite taille (mobiles) */
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
+  
   /* Titre */
   .title {
     font-size: 1.5rem;
@@ -62,11 +62,24 @@
     margin-bottom: 40px;
   }
 
-  /* Liens de téléchargement */
-  .download-link {
-    padding: 8px 16px;
-    font-size: 0.9rem;
-  }
+
+  li {
+    margin: 0rem;
+}
+
+
+/* Liens de téléchargement */
+.download-link {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  margin-top: 2rem;
+
+}
 
   /* Images des semestres */
   .semester-image {
@@ -85,4 +98,14 @@
   .semester {
     margin-bottom: 20px;
   }
+}
+
+
+@media screen and (min-width:500px) and (max-width:770px) {
+  
+  .download-link {
+    width: 93%;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+}
 }

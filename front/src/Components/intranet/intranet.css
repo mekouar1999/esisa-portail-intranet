@@ -62,7 +62,9 @@
 
 .content {
   flex: 1;
-  padding: 20px;
+  padding-top: 3rem;
+  padding-left: 15px;
+    padding-right: 15px;
 }
 
 .nav-icon,
@@ -168,6 +170,7 @@
     font-size: 24px;
     cursor: pointer;
     z-index: 101; /* Assure que le toggle est au-dessus de la navigation */
+    color: #003366;
   }
 
   /* Ajout d'un overlay pour masquer le contenu lorsque la navigation est ouverte */
@@ -187,3 +190,15 @@
   }
 }
 
+
+@media screen and (min-width: 768px) {
+  .toggle-nav {
+    display: none;
+    }
+    
+}
+
+.divToggle{
+  width: 100%;
+  background-color: white;
+}

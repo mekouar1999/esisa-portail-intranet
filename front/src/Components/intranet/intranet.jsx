@@ -69,7 +69,7 @@ const Intranet = () => {
     <div className="intranet-container">
       <nav className={`nav ${showNav ? 'show' : ''}`}> {/* Ajout de la classe show pour afficher la navigation sur les appareils mobiles */}
         <FaBars className="toggle-nav" onClick={() => setShowNav(!showNav)} /> {/* Toggle pour afficher/cacher la navigation sur les appareils mobiles */}
-        <h2 className='nomPersMenu'>Bonjour {firstName} !</h2>
+        <h2 className='nomPersMenu'>Bonjour {firstName} 😊 </h2>
 
         {/* Les éléments de navigation restent inchangés */}
        

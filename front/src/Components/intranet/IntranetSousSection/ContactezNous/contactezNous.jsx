@@ -144,6 +144,8 @@ const ContactezNous = () => {
           <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer"><FaLinkedin className="social-icon" /></a>
         </div>
       </div>
+
+      <br/>
     </>
   );
 };

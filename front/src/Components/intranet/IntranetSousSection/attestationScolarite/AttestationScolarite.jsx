@@ -14,11 +14,11 @@ const Attestation = () => (
         <ul className="semester-list">
           <li className="semester">
             <img src={logoAttestation} alt="Attestation" className="semester-image" />
-            <a href="/attestation-annee-1-semestre-1.pdf" className="download-link" download>Attestation - Semestre 1</a>
+            <div style={{textAlign:"center"}}>            <a href="/attestation-annee-1-semestre-1.pdf" className="download-link" download>Attestation - Semestre 1</a></div>
           </li>
           <li className="semester">
             <img src={logoAttestation} alt="Attestation" className="semester-image" />
-            <a href="/attestation-annee-1-semestre-2.pdf" className="download-link" download>Attestation - Semestre 2</a>
+            <div style={{textAlign:"center"}}>            <a href="/attestation-annee-1-semestre-2.pdf" className="download-link" download>Attestation - Semestre 2</a></div>
           </li>
         </ul>
       </div>
@@ -27,11 +27,11 @@ const Attestation = () => (
         <ul className="semester-list">
           <li className="semester">
             <img src={logoAttestation} alt="Attestation" className="semester-image" />
-            <a href="/attestation-annee-2-semestre-1.pdf" className="download-link" download>Attestation - Semestre 1</a>
+            <div style={{textAlign:"center"}}>            <a href="/attestation-annee-2-semestre-1.pdf" className="download-link" download>Attestation - Semestre 1</a></div>
           </li>
           <li className="semester">
             <img src={logoAttestation} alt="Attestation" className="semester-image" />
-            <a href="/attestation-annee-2-semestre-2.pdf" className="download-link" download>Attestation - Semestre 2</a>
+            <div style={{textAlign:"center"}}>            <a href="/attestation-annee-2-semestre-2.pdf" className="download-link" download>Attestation - Semestre 2</a></div>
           </li>
         </ul>
       </div>
@@ -40,11 +40,11 @@ const Attestation = () => (
         <ul className="semester-list">
           <li className="semester">
             <img src={logoAttestation} alt="Attestation" className="semester-image" />
-            <a href="/attestation-annee-3-semestre-1.pdf" className="download-link" download>Attestation - Semestre 1</a>
+            <div style={{textAlign:"center"}}>            <a href="/attestation-annee-3-semestre-1.pdf" className="download-link" download>Attestation - Semestre 1</a></div>
           </li>
           <li className="semester">
             <img src={logoAttestation} alt="Attestation" className="semester-image" />
-            <a href="/attestation-annee-3-semestre-2.pdf" className="download-link" download>Attestation - Semestre 2</a>
+            <div style={{textAlign:"center"}}>            <a href="/attestation-annee-3-semestre-2.pdf" className="download-link" download>Attestation - Semestre 2</a></div>
           </li>
         </ul>
       </div>
@@ -53,11 +53,11 @@ const Attestation = () => (
         <ul className="semester-list">
           <li className="semester">
             <img src={logoAttestation} alt="Attestation" className="semester-image" />
-            <a href="/attestation-annee-4-semestre-1.pdf" className="download-link" download>Attestation - Semestre 1</a>
+            <div style={{textAlign:"center"}}>            <a href="/attestation-annee-4-semestre-1.pdf" className="download-link" download>Attestation - Semestre 1</a></div>
           </li>
           <li className="semester">
             <img src={logoAttestation} alt="Attestation" className="semester-image" />
-            <a href="/attestation-annee-4-semestre-2.pdf" className="download-link" download>Attestation - Semestre 2</a>
+            <div style={{textAlign:"center"}}>            <a href="/attestation-annee-4-semestre-2.pdf" className="download-link" download>Attestation - Semestre 2</a></div>
           </li>
         </ul>
       </div>
@@ -66,11 +66,11 @@ const Attestation = () => (
         <ul className="semester-list">
           <li className="semester">
             <img src={logoAttestation} alt="Attestation" className="semester-image" />
-            <a href="/attestation-annee-5-semestre-1.pdf" className="download-link" download>Attestation - Semestre 1</a>
+            <div style={{textAlign:"center"}}>            <a href="/attestation-annee-5-semestre-1.pdf" className="download-link" download>Attestation - Semestre 1</a></div>
           </li>
           <li className="semester">
             <img src={logoAttestation} alt="Attestation" className="semester-image" />
-            <a href="/attestation-annee-5-semestre-2.pdf" className="download-link" download>Attestation - Semestre 2</a>
+            <div style={{textAlign:"center"}}>            <a href="/attestation-annee-5-semestre-2.pdf" className="download-link" download>Attestation - Semestre 2</a></div>
           </li>
         </ul>
       </div>
