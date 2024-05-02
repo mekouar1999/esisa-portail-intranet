@@ -50,7 +50,6 @@
 
 /* Styles spécifiques pour les écrans de petite taille (mobiles) */
 @media (max-width: 1000px) {
-  
   /* Titre */
   .title {
     font-size: 1.5rem;
@@ -62,50 +61,45 @@
     margin-bottom: 40px;
   }
 
-
   li {
     margin: 0rem;
-}
+  }
 
-
-/* Liens de téléchargement */
-.download-link {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-  margin-top: 2rem;
-
-}
+  /* Liens de téléchargement */
+  .download-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    margin-top: 2rem;
+  }
 
   /* Images des semestres */
   .semester-image {
     width: 15rem;
     height: 15rem;
   }
-  
+
   /* Réorganisation des semestres en colonne */
   .semester-list {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
-  
+
   /* Espacement entre les semestres */
   .semester {
     margin-bottom: 20px;
   }
 }
 
-
-@media screen and (min-width:500px) and (max-width:770px) {
-  
+@media screen and (min-width: 500px) and (max-width: 770px) {
   .download-link {
     width: 93%;
     padding: 8px 16px;
     font-size: 0.9rem;
-}
+  }
 }

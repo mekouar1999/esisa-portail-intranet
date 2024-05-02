@@ -31,7 +31,6 @@
   border-radius: 5px;
   transition: background-color 0.3s ease;
   margin-top: 2rem;
-
 }
 
 /* Image des semestres */
@@ -49,83 +48,78 @@
   transform: scale(1.1); /* Zoom léger au survol */
 }
 
-
 .download-link-releve:hover {
   background-color: #0056b3;
 }
 
-ul{
+ul {
   display: flex;
-justify-content: space-around; 
-margin-top:3rem }
-
-
+  justify-content: space-around;
+  margin-top: 3rem;
+}
 
 .annee-link {
-display: inline-block;
-padding: 10px 20px;
-background-color: #012448;
-color: #fff;
-text-decoration: none;
-border-radius: 5px;
-transition: background-color 0.3s ease;
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #012448;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
 
 /* Styles spécifiques pour les écrans de petite taille (mobiles) */
 @media (max-width: 768px) {
-/* Titre */
-.title {
-  font-size: 1.5rem;
+  /* Titre */
+  .title {
+    font-size: 1.5rem;
+  }
+
+  /* Description */
+  .description {
+    font-size: 1rem;
+    margin-bottom: 40px;
+  }
+
+  /* Liens de téléchargement */
+  .download-link-releve {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+
+  /* Images des semestres */
+  .semester-image {
+    width: 15rem;
+    height: 15rem;
+  }
+
+  /* Réorganisation des semestres en colonne */
+  .semester-list {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Espacement entre les semestres */
+  .semester {
+    margin-bottom: 20px;
+  }
 }
 
-/* Description */
-.description {
-  font-size: 1rem;
-  margin-bottom: 40px;
+.imgg {
+  display: none;
 }
 
-/* Liens de téléchargement */
-.download-link-releve {
-  padding: 8px 16px;
-  font-size: 0.9rem;
-}
-
-/* Images des semestres */
-.semester-image {
-  width: 15rem;
-  height: 15rem;
-}
-
-/* Réorganisation des semestres en colonne */
-.semester-list {
-  flex-direction: column;
-  align-items: center;
-}
-
-/* Espacement entre les semestres */
 .semester {
-  margin-bottom: 20px;
-}
-}
-
-.imgg{
-display: none;
-}
-
-
-.semester{
   display: flex;
   flex-direction: column;
 }
 
-
-@media screen and (max-width:750px) {
-  .semester{
+@media screen and (max-width: 750px) {
+  .semester {
     display: block;
   }
 
-  .download-link-releve{
+  .download-link-releve {
     width: 100%;
   }
-  
 }

@@ -1,23 +1,29 @@
-
-
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; 
-import { FaUser, FaEnvelope, FaFileAlt, FaBook, FaCalendarAlt, FaSignOutAlt, FaBars } from 'react-icons/fa'; // Ajout de l'icône FaBars
-import InfoPersonnel from './IntranetSousSection/InfoPersonnel/InfoPersonnel';
-import ContactezNous from './IntranetSousSection/ContactezNous/contactezNous';
-import AttestationScolarite from './IntranetSousSection/attestationScolarite/AttestationScolarite';
-import ReleveDeNotes from './IntranetSousSection/RelevedeNotes/relevedeNotes';
-import Event from './IntranetSousSection/Events/event';
-import Documents from './IntranetSousSection/documents/documents'; 
-import './intranet.css'; 
-import EmploiDuTemps from './IntranetSousSection/EmploiduTemps/emploidutemps';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  FaUser,
+  FaEnvelope,
+  FaFileAlt,
+  FaBook,
+  FaCalendarAlt,
+  FaSignOutAlt,
+  FaBars,
+} from "react-icons/fa"; // Ajout de l'icône FaBars
+import InfoPersonnel from "./IntranetSousSection/InfoPersonnel/InfoPersonnel";
+import ContactezNous from "./IntranetSousSection/ContactezNous/contactezNous";
+import AttestationScolarite from "./IntranetSousSection/attestationScolarite/AttestationScolarite";
+import ReleveDeNotes from "./IntranetSousSection/RelevedeNotes/relevedeNotes";
+import Event from "./IntranetSousSection/Events/event";
+import Documents from "./IntranetSousSection/documents/documents";
+import "./intranet.css";
+import EmploiDuTemps from "./IntranetSousSection/EmploiduTemps/emploidutemps";
 
 const Intranet = () => {
   const [selectedComponent, setSelectedComponent] = useState("infoPersonnel");
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const [showNav, setShowNav] = useState(false); // Ajout de l'état local pour contrôler l'affichage de la navigation
   const navigate = useNavigate();
-  const firstName = sessionStorage.getItem('firstname'); 
+  const firstName = sessionStorage.getItem("firstname");
 
   const handleComponentChange = (component) => {
     setSelectedComponent(component);
@@ -31,7 +37,7 @@ const Intranet = () => {
   const confirmLogout = () => {
     localStorage.clear();
     sessionStorage.clear();
-    navigate('/login');
+    navigate("/login");
   };
 
   const cancelLogout = () => {
@@ -67,38 +73,76 @@ const Intranet = () => {
 
   return (
     <div className="intranet-container">
-      <nav className={`nav ${showNav ? 'show' : ''}`}> {/* Ajout de la classe show pour afficher la navigation sur les appareils mobiles */}
-        <FaBars className="toggle-nav" onClick={() => setShowNav(!showNav)} /> {/* Toggle pour afficher/cacher la navigation sur les appareils mobiles */}
-        <h2 className='nomPersMenu'>Bonjour {firstName} 😊 </h2>
-
+      <nav className={`nav ${showNav ? "show" : ""}`}>
+        {" "}
+        {/* Ajout de la classe show pour afficher la navigation sur les appareils mobiles */}
+        <FaBars className="toggle-nav" onClick={() => setShowNav(!showNav)} />{" "}
+        {/* Toggle pour afficher/cacher la navigation sur les appareils mobiles */}
+        <h2 className="nomPersMenu">Bonjour {firstName} 😊 </h2>
         {/* Les éléments de navigation restent inchangés */}
-       
-        <div onClick={() => handleComponentChange("infoPersonnel")} className={`sub-nav-link ${selectedComponent === "infoPersonnel" && "active"}`}>
+        <div
+          onClick={() => handleComponentChange("infoPersonnel")}
+          className={`sub-nav-link ${
+            selectedComponent === "infoPersonnel" && "active"
+          }`}
+        >
           <FaUser className="nav-icon" />
           <span className="nav-text">Informations </span>
         </div>
-        <div onClick={() => handleComponentChange("contactezNous")} className={`sub-nav-link ${selectedComponent === "contactezNous" && "active"}`}>
+        <div
+          onClick={() => handleComponentChange("contactezNous")}
+          className={`sub-nav-link ${
+            selectedComponent === "contactezNous" && "active"
+          }`}
+        >
           <FaEnvelope className="nav-icon" />
           <span className="nav-text">Nous contacter</span>
         </div>
         <div className="sub-nav">
-          <div onClick={() => handleComponentChange("attestationScolarite")} className={`sub-nav-link ${selectedComponent === "attestationScolarite" && "active"}`}>
+          <div
+            onClick={() => handleComponentChange("attestationScolarite")}
+            className={`sub-nav-link ${
+              selectedComponent === "attestationScolarite" && "active"
+            }`}
+          >
             <FaFileAlt className="sub-nav-icon" />
             <span className="sub-nav-text">Attestations</span>
           </div>
-          <div onClick={() => handleComponentChange("releveDeNotes")} className={`sub-nav-link ${selectedComponent === "releveDeNotes" && "active"}`}>
+          <div
+            onClick={() => handleComponentChange("releveDeNotes")}
+            className={`sub-nav-link ${
+              selectedComponent === "releveDeNotes" && "active"
+            }`}
+          >
             <FaBook className="sub-nav-icon" />
             <span className="sub-nav-text">Relevé de notes</span>
           </div>
-          <div onClick={() => handleComponentChange("emploidutemps")} className={`sub-nav-link ${selectedComponent === "emploidutemps" && "active"}`}>
+          <div
+            onClick={() => handleComponentChange("emploidutemps")}
+            className={`sub-nav-link ${
+              selectedComponent === "emploidutemps" && "active"
+            }`}
+          >
             <FaCalendarAlt className="sub-nav-icon" />
             <span className="sub-nav-text">Emplois du temps</span>
           </div>
-          <div onClick={() => handleComponentChange("documents")} className={`sub-nav-link ${selectedComponent === "documents" && "active"}`}> {/* Ajout de la gestion de la section Documents */}
+          <div
+            onClick={() => handleComponentChange("documents")}
+            className={`sub-nav-link ${
+              selectedComponent === "documents" && "active"
+            }`}
+          >
+            {" "}
+            {/* Ajout de la gestion de la section Documents */}
             <FaFileAlt className="sub-nav-icon" />
             <span className="sub-nav-text">Documents</span>
           </div>
-          <div onClick={() => handleComponentChange("evenements")} className={`sub-nav-link ${selectedComponent === "evenements" && "active"}`}>
+          <div
+            onClick={() => handleComponentChange("evenements")}
+            className={`sub-nav-link ${
+              selectedComponent === "evenements" && "active"
+            }`}
+          >
             <FaCalendarAlt className="sub-nav-icon" />
             <span className="sub-nav-text">Événements</span>
           </div>
@@ -108,9 +152,7 @@ const Intranet = () => {
           </div>
         </div>
       </nav>
-      <div className="content">
-        {componentToDisplay}
-      </div>
+      <div className="content">{componentToDisplay}</div>
       {/* Modal de confirmation de déconnexion */}
       {showLogoutModal && (
         <div className="modal-overlay">
@@ -123,6 +165,6 @@ const Intranet = () => {
       )}
     </div>
   );
-}
+};
 
 export default Intranet;

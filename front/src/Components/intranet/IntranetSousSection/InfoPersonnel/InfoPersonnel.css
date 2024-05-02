@@ -7,11 +7,9 @@
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   width: 40%;
-
 }
 
-
-@media screen and (max-width : 470px) {
+@media screen and (max-width: 470px) {
   .info-personnel-container {
     margin: 20px auto;
     padding: 20px;
@@ -22,8 +20,17 @@
   }
 }
 
+.info-item {
+  font-size: 1rem;
+  color: #555;
+}
 
-
+@media screen and (max-width: 470px) {
+  .info-item {
+    font-size: 0.7rem;
+    color: #555;
+  }
+}
 
 .info-1-container {
   margin: 20px auto;
@@ -31,7 +38,7 @@
   background-color: #f9f9f9;
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-width: 10%;
+  width: 10%;
 }
 
 .info-title {
@@ -52,17 +59,11 @@ width: 10%;
   justify-content: space-between;
 }
 
-.info-item {
-  font-size: 1rem;
-  color: #555;
-}
-
 .info-label {
   font-weight: bold;
 }
 
-.flex{
+.flex {
   display: flex;
   flex-basis: 50%; /* Chaque élément occupe la moitié de la largeur */
-
 }

@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
-import './emploidutemps.css'; 
-import emploiDuTempsImage from '../../../../images/edt1.png';
-import emploiDuTempsImage2 from '../../../../images/edt2.png';
+import React, { useState } from "react";
+import "./emploidutemps.css";
+import emploiDuTempsImage from "../../../../images/edt1.png";
+import emploiDuTempsImage2 from "../../../../images/edt2.png";
 
 const EmploiDuTemps = () => {
-
-
   return (
     <div className="bulletins-container">
       <div className="emploi-du-temps-container">
@@ -17,78 +15,157 @@ const EmploiDuTemps = () => {
         <div className="swiper">
           <div className="swiper-wrapper">
             <div className="swiper-slide">
-              <div className="anneeedt-link">        <h3 className="annee-link">Groupe A</h3>
-
-                <ul className='edt'>
+              <div className="anneeedt-link">
+                {" "}
+                <h3 className="annee-link">Groupe A</h3>
+                <ul className="edt">
                   <li>
-                    <img src={emploiDuTempsImage} alt="Emploi du temps" className="emploi-du-temps-image" />
-                    <a href="/emploi-du-temps-semestre-1.pdf" className="download-link" download>Emploi du temps - Semestre 1</a>
+                    <img
+                      src={emploiDuTempsImage}
+                      alt="Emploi du temps"
+                      className="emploi-du-temps-image"
+                    />
+                    <a
+                      href="/emploi-du-temps-semestre-1.pdf"
+                      className="download-link"
+                      download
+                    >
+                      Emploi du temps - Semestre 1
+                    </a>
                   </li>
                   <li>
-                    <img src={emploiDuTempsImage2} alt="Emploi du temps" className="emploi-du-temps-image" />
-                    <a href="/emploi-du-temps-semestre-2.pdf" className="download-link" download>Emploi du temps - Semestre 2</a>
+                    <img
+                      src={emploiDuTempsImage2}
+                      alt="Emploi du temps"
+                      className="emploi-du-temps-image"
+                    />
+                    <a
+                      href="/emploi-du-temps-semestre-2.pdf"
+                      className="download-link"
+                      download
+                    >
+                      Emploi du temps - Semestre 2
+                    </a>
                   </li>
                 </ul>
               </div>
             </div>
 
             <div className="swiper-slide">
-              <div className="anneeedt-link">      <h3 className="annee-link">Groupe B</h3>
-
-                <ul className='edt'>
+              <div className="anneeedt-link">
+                {" "}
+                <h3 className="annee-link">Groupe B</h3>
+                <ul className="edt">
                   <li>
-                    <img src={emploiDuTempsImage} alt="Emploi du temps" className="emploi-du-temps-image" />
-                    <a href="/emploi-du-temps-semestre-1.pdf" className="download-link" download>Emploi du temps - Semestre 1</a>
+                    <img
+                      src={emploiDuTempsImage}
+                      alt="Emploi du temps"
+                      className="emploi-du-temps-image"
+                    />
+                    <a
+                      href="/emploi-du-temps-semestre-1.pdf"
+                      className="download-link"
+                      download
+                    >
+                      Emploi du temps - Semestre 1
+                    </a>
                   </li>
                   <li>
-                    <img src={emploiDuTempsImage2} alt="Emploi du temps" className="emploi-du-temps-image" />
-                    <a href="/emploi-du-temps-semestre-2.pdf" className="download-link" download>Emploi du temps - Semestre 2</a>
+                    <img
+                      src={emploiDuTempsImage2}
+                      alt="Emploi du temps"
+                      className="emploi-du-temps-image"
+                    />
+                    <a
+                      href="/emploi-du-temps-semestre-2.pdf"
+                      className="download-link"
+                      download
+                    >
+                      Emploi du temps - Semestre 2
+                    </a>
                   </li>
                 </ul>
               </div>
             </div>
 
             <div className="swiper-slide">
-              <div className="anneeedt-link">        <h3 className="annee-link">Groupe C</h3>
-
-                <ul className='edt'>
+              <div className="anneeedt-link">
+                {" "}
+                <h3 className="annee-link">Groupe C</h3>
+                <ul className="edt">
                   <li>
-                    <img src={emploiDuTempsImage} alt="Emploi du temps" className="emploi-du-temps-image" />
-                    <a href="/emploi-du-temps-semestre-1.pdf" className="download-link" download>Emploi du temps - Semestre 1</a>
+                    <img
+                      src={emploiDuTempsImage}
+                      alt="Emploi du temps"
+                      className="emploi-du-temps-image"
+                    />
+                    <a
+                      href="/emploi-du-temps-semestre-1.pdf"
+                      className="download-link"
+                      download
+                    >
+                      Emploi du temps - Semestre 1
+                    </a>
                   </li>
                   <li>
-                    <img src={emploiDuTempsImage2} alt="Emploi du temps" className="emploi-du-temps-image" />
-                    <a href="/emploi-du-temps-semestre-2.pdf" className="download-link" download>Emploi du temps - Semestre 2</a>
+                    <img
+                      src={emploiDuTempsImage2}
+                      alt="Emploi du temps"
+                      className="emploi-du-temps-image"
+                    />
+                    <a
+                      href="/emploi-du-temps-semestre-2.pdf"
+                      className="download-link"
+                      download
+                    >
+                      Emploi du temps - Semestre 2
+                    </a>
                   </li>
                 </ul>
               </div>
             </div>
-
 
             <div className="swiper-slide">
-              <div className="anneeedt-link">       <h3 className="annee-link">Groupe D</h3>
-
-                <ul className='edt'>
+              <div className="anneeedt-link">
+                {" "}
+                <h3 className="annee-link">Groupe D</h3>
+                <ul className="edt">
                   <li>
-                    <img src={emploiDuTempsImage} alt="Emploi du temps" className="emploi-du-temps-image" />
-                    <a href="/emploi-du-temps-semestre-1.pdf" className="download-link" download>Emploi du temps - Semestre 1</a>
+                    <img
+                      src={emploiDuTempsImage}
+                      alt="Emploi du temps"
+                      className="emploi-du-temps-image"
+                    />
+                    <a
+                      href="/emploi-du-temps-semestre-1.pdf"
+                      className="download-link"
+                      download
+                    >
+                      Emploi du temps - Semestre 1
+                    </a>
                   </li>
                   <li>
-                    <img src={emploiDuTempsImage2} alt="Emploi du temps" className="emploi-du-temps-image" />
-                    <a href="/emploi-du-temps-semestre-2.pdf" className="download-link" download>Emploi du temps - Semestre 2</a>
+                    <img
+                      src={emploiDuTempsImage2}
+                      alt="Emploi du temps"
+                      className="emploi-du-temps-image"
+                    />
+                    <a
+                      href="/emploi-du-temps-semestre-2.pdf"
+                      className="download-link"
+                      download
+                    >
+                      Emploi du temps - Semestre 2
+                    </a>
                   </li>
                 </ul>
               </div>
             </div>
-
-
-        
           </div>
-         
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default EmploiDuTemps;
