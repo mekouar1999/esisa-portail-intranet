@@ -61,8 +61,8 @@ const InfoPersonnel = () => {
         </p>
       </div>
 
-      <div className="info-1-container">
-        <h2 className="info-title">
+      <div className="info-1-containerPicture">
+        <h2 className="info-containerPicture">
           <FaUser className="user-icon" />{" "}
         </h2>
       </div>

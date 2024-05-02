@@ -9,6 +9,24 @@
   width: 40%;
 }
 
+
+
+.info-1-containerPicture {
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  width: 50px;
+  border-radius: 50%;
+  height: 50px;
+}
+
+.info-containerPicture {
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
 @media screen and (max-width: 470px) {
   .info-personnel-container {
     margin: 20px auto;
