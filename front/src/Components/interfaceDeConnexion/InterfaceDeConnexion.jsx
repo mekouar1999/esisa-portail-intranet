@@ -92,7 +92,11 @@ else {
           <a href="/reset-password" className="forgot-password-link">
             Mot de passe oublié ?
           </a>
+
+          <div style={{margin:"auto"}}>
           <button type="submit" className="submit-button">Se connecter</button>
+
+          </div>
         </form>
       </div>
       <img src={logo} alt="Logo" className="logo-image" />
