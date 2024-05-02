@@ -18,10 +18,10 @@ const EmploiDuTemps = () => {
         <Grid container spacing={2}>
           {["Groupe A", "Groupe B", "Groupe C", "Groupe D"].map((groupe, index) => (
             <Grid item xs={12} sm={6} md={3} key={index}>
-              <Card>
+              <Card style={{textAlign:"center"}}>
               <CardContent style={{ backgroundColor: "rgb(193, 187, 216)" }}>
 
-                  <Typography variant="h6" gutterBottom className="annee-link">
+                  <Typography style={{marginBottom:"1rem"}} variant="h6" gutterBottom className="annee-link">
                     {groupe}
                   </Typography>
                   <Grid container spacing={1}>
@@ -35,16 +35,16 @@ const EmploiDuTemps = () => {
                             alt={`Emploi du temps - Semestre ${semestre}`}
                           />
                           <CardContent>
-                            <Typography variant="h4" gutterBottom>
+                            <Typography variant="h6" gutterBottom>
                               Semestre {semestre}
                             </Typography>
                             <Typography variant="body2">
-                              <a
+                              <a style={{textDecoration:"none" , color:"gray" ,  fontWeight:"bold"}}
                                 href={`/emploi-du-temps-semestre-${semestre}.pdf`}
                                 className="download-link"
                                 download
                               >
-                                Emploi du temps - Semestre {semestre}
+                                Cliquez ici pour télécharger
                               </a>
                             </Typography>
                           </CardContent>
