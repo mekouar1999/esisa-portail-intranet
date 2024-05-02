@@ -32,8 +32,9 @@ const Intranet = () => {
 
   const handleLogout = () => {
     setShowLogoutModal(true);
+    setShowNav(false); // Fermer la navigation lorsque vous appuyez sur Déconnexion
   };
-
+  
   const confirmLogout = () => {
     localStorage.clear();
     sessionStorage.clear();
