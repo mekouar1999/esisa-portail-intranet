@@ -25,6 +25,21 @@ const InfoPersonnel = () => {
   // Liste des clés à exclure
   const excludedKeys = ["isBlocked", "password", "numPassport", "_id", "createdAt","updatedAt", "__v", "refreshToken","passwordResetToken", "passwordResetExpires"];
 
+  // Mapping des noms de propriétés en anglais vers leurs équivalents en français
+  const frenchPropertyNames = {
+    firstname: 'Prénom',
+    lastname: 'Nom',
+    datedeNaissance: 'Date de Naissance',
+    PaysOrigine: 'Pays d\'Origine',
+    NumCneBac: 'Numéro CNE Bac',
+    NumCardId: 'Numéro Carte d\'Identité',
+    role: 'Rôle',
+    Sexe: 'Sexe',
+    email: 'Email',
+    mobile: 'Téléphone'
+    // Ajoutez les autres propriétés au besoin
+  };
+
   // Fonction pour diviser le tableau en sous-tableaux de deux éléments chacun
   const chunkArray = (arr, size) => {
     return arr.reduce((acc, _, i) => {
@@ -57,7 +72,7 @@ const InfoPersonnel = () => {
           {chunk.map(([key, value]) => (
             <div key={key} className="info-personnel-container">
               <div className="info-item">
-                <span className="info-label">{key}:</span> {value}
+                <span className="info-label">{frenchPropertyNames[key] || key}:</span> {value}
               </div>
             </div>
           ))}

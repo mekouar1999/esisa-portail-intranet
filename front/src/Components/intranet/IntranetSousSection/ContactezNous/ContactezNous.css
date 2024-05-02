@@ -107,3 +107,25 @@ body{
   /* background: linear-gradient(to left, #add8e6, #1e90ff); */
   background: linear-gradient(to left, #b6edff, #dcdee0);
 }
+
+.toast {
+  position: fixed;
+  top: 20px; /* Position en haut */
+  right: 20px; /* Position à droite */
+  background-color: #4CAF50;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+.toast.hide {
+  opacity: 0;
+}
+
