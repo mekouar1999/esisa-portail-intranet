@@ -10,6 +10,9 @@ const documentSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    fileData: {
+        type: String, // Stocker les données base64 du fichier
+    },
     // Autres champs pour stocker les détails du document
 });
 

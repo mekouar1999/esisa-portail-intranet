@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./documents.css";
 
@@ -14,10 +14,9 @@ const Documents = () => {
   const token = sessionStorage.getItem("token"); // Récupérer le token de sessionStorage
 
   const handleFileChange = (event, fileType) => {
-    setFiles({
-      ...files,
-      [fileType]: event.target.files[0],
-    });
+    const newFiles = { ...files };
+    newFiles[fileType] = event.target.files[0];
+    setFiles(newFiles);
   };
 
   const handleUpload = async () => {
@@ -59,6 +58,33 @@ const Documents = () => {
     }
   };
 
+  const handleDownload = async (file) => {
+    try {
+      const response = await axios.get(file.url, {
+        responseType: "blob",
+      });
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", file.originalname);
+      document.body.appendChild(link);
+      link.click();
+    } catch (error) {
+      console.error("Erreur lors du téléchargement du fichier : ", error);
+    }
+  };
+
+  useEffect(() => {
+    // Nettoyer les fichiers téléchargés lorsqu'un nouveau fichier est téléchargé
+    setFiles({
+      releveBac: null,
+      diplomeBac: null,
+      cin: null,
+      photo: null,
+      attestationHebergement: null,
+    });
+  }, [uploadedFiles]);
+
   return (
     <>
       <div className="centered-content">
@@ -82,6 +108,9 @@ const Documents = () => {
                     ? "Attestation d'hébergement"
                     : fileType.toUpperCase()}
                 </label>
+                {files[fileType] && (
+                  <button onClick={handleUpload}>Télécharger</button>
+                )}
               </div>
               <div style={{ textAlign: "center" }}>
                 <input
@@ -94,9 +123,6 @@ const Documents = () => {
             </div>
           ))}
         </div>
-        <button className="upload-button" onClick={handleUpload}>
-          Télécharger
-        </button>
 
         {uploadedFiles.length > 0 && (
           <div className="uploaded-files">
@@ -104,9 +130,16 @@ const Documents = () => {
             <ul className="file-list">
               {uploadedFiles.map((file, index) => (
                 <li key={index}>
-                  <a href={file.url} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={file.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     {file.originalname}
                   </a>
+                  <button onClick={() => handleDownload(file)}>
+                    Télécharger
+                  </button>
                 </li>
               ))}
             </ul>

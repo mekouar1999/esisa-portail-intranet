@@ -1,108 +1,94 @@
-// !mdbgum
-
 const mongoose = require('mongoose');
-const crypto = require('crypto');
+const bcrypt = require('bcrypt');
 
-const bcrypt = require("bcrypt");
-
-var userSchema = new mongoose.Schema({
-    firstname:{
-        type:String,
-        required:true,
+const userSchema = new mongoose.Schema({
+    firstname: {
+        type: String,
+        required: true,
     },
-    lastname:{
-        type:String,
-        required:true,
+    lastname: {
+        type: String,
+        required: true,
     },
-    datedeNaissance:{
-        type:String,
-        required:true,
+    datedeNaissance: {
+        type: String,
+        required: true,
     },
-    PaysOrigine:{
-        type:String,
-        required:true,
+    PaysOrigine: {
+        type: String,
+        required: true,
     },
-    NumCneBac:{
-        type:String,
-        required:true,
+    NumCneBac: {
+        type: String,
+        required: true,
     },
-    NumCardId:{
-        type:String,
-        required:true,
-        unique:true,
+    NumCardId: {
+        type: String,
+        required: true,
+        unique: true,
     },
-    uploadedDocuments: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Document',
-  }],
+    uploadedDocumentsData: [{
+        type: String, // Stocker les données base64 des fichiers
+    }],
     role: {
         type: String,
-        default: "etudiant",
-      },
-      refreshToken: {
+        default: 'etudiant',
+    },
+    refreshToken: {
         type: String,
-      },
-      passwordChangedAt: Date,
-      passwordResetToken: String,
-      passwordResetExpires: Date,
-      isBlocked: {
+    },
+    passwordChangedAt: Date,
+    passwordResetToken: String,
+    passwordResetExpires: Date,
+    isBlocked: {
         type: Boolean,
         default: false,
-      },
-    Sexe:{
-        type:String,
-        required:true,
     },
-    email:{
-        type:String,
-        required:true,
-        unique:true,
-
+    Sexe: {
+        type: String,
+        required: true,
     },
-    mobile:{
-        type:String,
-        required:true,
-        unique:true,
-
+    email: {
+        type: String,
+        required: true,
+        unique: true,
     },
-    password:{
-        type:String,
+    mobile: {
+        type: String,
+        required: true,
+        unique: true,
     },
-    
-},
-{
-    timestamps: true, // pour voir date de creation et d'update
-  });
+    password: {
+        type: String,
+    },
+}, {
+    timestamps: true,
+});
 
-
-userSchema.pre("save", async function (next) {
-    if (!this.isModified("password")) {
-      next();
+userSchema.pre('save', async function (next) {
+    if (!this.isModified('password')) {
+        next();
     }
-  
+
     const saltRounds = 10;
     const salt = await bcrypt.genSaltSync(saltRounds);
     this.password = await bcrypt.hash(this.password, salt);
-  });
-  
-  
-  userSchema.methods.isPasswordMatched = async function (enteredPassword) {
+});
+
+userSchema.methods.isPasswordMatched = async function (enteredPassword) {
     const isMatched = await bcrypt.compare(enteredPassword, this.password);
-    console.log("Password Matched:", isMatched);
+    console.log('Password Matched:', isMatched);
     return isMatched;
 };
 
-  userSchema.methods.createpasswordResetToken = async function () {
-    const resetToken = crypto.randomBytes(32).toString("hex");
+userSchema.methods.createpasswordResetToken = async function () {
+    const resetToken = crypto.randomBytes(32).toString('hex');
     this.passwordResetToken = crypto
-      .createHash("sha256")
-      .update(resetToken)
-      .digest("hex");
+        .createHash('sha256')
+        .update(resetToken)
+        .digest('hex');
     this.passwordResetExpires = Date.now() + 30 * 60 * 1000;
     return resetToken;
-  };
-  
-  
+};
 
-//Export the model
 module.exports = mongoose.model('User', userSchema);
