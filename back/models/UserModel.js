@@ -31,6 +31,10 @@ var userSchema = new mongoose.Schema({
         required:true,
         unique:true,
     },
+    uploadedDocuments: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Document',
+  }],
     role: {
         type: String,
         default: "etudiant",

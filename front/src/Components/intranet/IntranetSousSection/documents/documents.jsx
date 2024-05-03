@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./documents.css"; // Assurez-vous de créer le fichier CSS pour le style
+import "./documents.css";
 
-const UploadPage = () => {
+const Documents = () => {
   const [files, setFiles] = useState({
     releveBac: null,
     diplomeBac: null,
@@ -11,6 +11,7 @@ const UploadPage = () => {
     attestationHebergement: null,
   });
   const [uploadedFiles, setUploadedFiles] = useState([]);
+  const token = sessionStorage.getItem("token"); // Récupérer le token de sessionStorage
 
   const handleFileChange = (event, fileType) => {
     setFiles({
@@ -35,12 +36,26 @@ const UploadPage = () => {
         {
           headers: {
             "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`, // Utiliser le token dans l'en-tête Authorization
           },
         }
       );
       setUploadedFiles(response.data);
+
+      // Assurez-vous d'envoyer l'ID de l'utilisateur avec les documents téléchargés
+      await axios.post(
+        "http://localhost:4000/api/upload/associate-documents",
+        {
+          uploadedFiles: response.data,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Utiliser le token dans l'en-tête Authorization
+          },
+        }
+      );
     } catch (error) {
-      console.error("Error uploading files: ", error);
+      console.error("Erreur lors du téléchargement des fichiers : ", error);
     }
   };
 
@@ -55,82 +70,32 @@ const UploadPage = () => {
 
       <div className="upload-page-container">
         <div className="file-inputs">
-          <div className="file-input">
-            <div className="divtitleDoc">
-              <label className="titleDoc">Relevé de bac</label>
-            </div>
-            <div style={{ textAlign: "center" }}>
-              <input
-                className="inputDoc"
-                type="file"
-                accept=".pdf,.jpg,.jpeg,.png"
-                onChange={(event) => handleFileChange(event, "releveBac")}
-              />
-            </div>
-          </div>
-          <div className="file-input">
-            <div className="divtitleDoc">
-              <label className="titleDoc">Diplôme de bac</label>
-            </div>{" "}
-            <div style={{ textAlign: "center" }}>
-              <input
-                className="inputDoc"
-                type="file"
-                accept=".pdf,.jpg,.jpeg,.png"
-                onChange={(event) => handleFileChange(event, "diplomeBac")}
-              />
-            </div>
-          </div>
-          <div className="file-input">
-            <div>
+          {Object.keys(files).map((fileType) => (
+            <div className="file-input" key={fileType}>
               <div className="divtitleDoc">
-                <label className="titleDoc">CIN</label>
+                <label className="titleDoc">
+                  {fileType === "releveBac"
+                    ? "Relevé de bac"
+                    : fileType === "diplomeBac"
+                    ? "Diplôme de bac"
+                    : fileType === "attestationHebergement"
+                    ? "Attestation d'hébergement"
+                    : fileType.toUpperCase()}
+                </label>
+              </div>
+              <div style={{ textAlign: "center" }}>
+                <input
+                  className="inputDoc"
+                  type="file"
+                  accept=".pdf,.jpg,.jpeg,.png"
+                  onChange={(event) => handleFileChange(event, fileType)}
+                />
               </div>
             </div>
-            <div style={{ textAlign: "center" }}>
-              <input
-                className="inputDoc"
-                type="file"
-                accept=".pdf,.jpg,.jpeg,.png"
-                onChange={(event) => handleFileChange(event, "cin")}
-              />
-            </div>{" "}
-          </div>
-          <div className="file-input">
-            <div className="divtitleDoc">
-              {" "}
-              <label className="titleDoc">Photo</label>
-            </div>
-
-            <div style={{ textAlign: "center" }}>
-              <input
-                className="inputDoc"
-                type="file"
-                accept=".pdf,.jpg,.jpeg,.png"
-                onChange={(event) => handleFileChange(event, "photo")}
-              />
-            </div>
-          </div>
-          <div className="file-input">
-            <div className="divtitleDoc">
-              {" "}
-              <label className="titleDoc">Attestation d'hébergement</label>
-            </div>
-
-            <div style={{ textAlign: "center" }}>
-              <input
-                className="inputDoc"
-                type="file"
-                accept=".pdf,.jpg,.jpeg,.png"
-                onChange={(event) =>
-                  handleFileChange(event, "attestationHebergement")
-                }
-              />
-            </div>
-          </div>
+          ))}
         </div>
         <button className="upload-button" onClick={handleUpload}>
-          Upload
+          Télécharger
         </button>
 
         {uploadedFiles.length > 0 && (
@@ -152,4 +117,4 @@ const UploadPage = () => {
   );
 };
 
-export default UploadPage;
+export default Documents;

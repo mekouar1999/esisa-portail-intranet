@@ -1,7 +1,10 @@
 const User = require('../models/UserModel');
+const Document = require('../models/documentModel');
+
 const asyncHandler = require("express-async-handler");
 const {generateRefreshToken} = require('../config/refreshToken');
 const sendEmail = require("./emailControl");
+const multer = require('multer'); // Pour gérer les téléchargements de fichiers
 
 const {generateToken} = require('../config/jwtToken');
 
@@ -361,7 +364,77 @@ const blockUser = asyncHandler(async (req, res, next) => {
         .json({ status: "fail", message: error.message, stack: error.stack });
     }
   });
+  const uploadDocument = async (req, res) => {
+    try {
+      console.log("Requête de téléchargement de fichiers reçue :", req.files);
+  
+      // Récupérez l'ID de l'utilisateur à partir de req.user
+      const { _id } = req.user;
+  
+      // Traitez chaque champ de fichier
+      const documents = [];
+      const fileFields = ['releveBac', 'diplomeBac', 'cin', 'photo', 'attestationHebergement'];
+  
+      fileFields.forEach(fieldName => {
+        if (req.files[fieldName]) {
+          const files = req.files[fieldName];
+          files.forEach(file => {
+            documents.push({
+              user: _id, // Utilisez l'ID de l'utilisateur récupéré
+              fieldType: fieldName,
+              fileType: file.mimetype,
+              filename: file.originalname,
+              path: file.path
+            });
+          });
+        }
+      });
+  
+      // Enregistrez les documents dans la base de données
+      const savedDocuments = await Document.insertMany(documents);
+  
+      console.log("Documents enregistrés dans la base de données :", savedDocuments);
+  
+      res.json(savedDocuments); // Répondez avec les détails des documents téléchargés
+    } catch (error) {
+      console.error("Erreur lors du téléchargement des fichiers : ", error);
+      res.status(500).json({ error: 'Une erreur est survenue lors du téléchargement des fichiers.' });
+    }
+  };
+  
+
+
+  
+  const associateDocuments = async (req, res) => {
+    try {
+      console.log("Requête d'association des documents reçue :", req.body);
+  
+      const { uploadedFiles } = req.body;
+      const userId = req.user._id; // Récupération de l'ID de l'utilisateur à partir de req.user
+  
+      // Recherchez l'utilisateur dans la base de données
+      const user = await User.findById(userId);
+  
+      console.log("Utilisateur trouvé :", user);
+  
+      // Associez les fichiers téléchargés à l'utilisateur
+      user.uploadedDocuments.push(...uploadedFiles);
+  
+      // Enregistrez les modifications apportées à l'utilisateur
+      await user.save();
+  
+      console.log("Documents associés à l'utilisateur avec succès.");
+  
+      res.status(200).send("Les documents ont été associés à l'utilisateur avec succès.");
+    } catch (error) {
+      console.error("Erreur lors de l'association des documents à l'utilisateur : ", error);
+      res.status(500).json({ error: 'Une erreur est survenue lors de l\'association des documents à l\'utilisateur.' });
+    }
+  };
+  
+  
+  module.exports = { uploadDocument, associateDocuments };
   
 
 module.exports = { CreateUser, loginUserControl, loginProf, handleRefreshToken, logout, getAllUser,
-    getAUser,deleteAUser, updateAUser, blockUser, unblockUser, updatePassword, forgotPasswordToken, resetPassword}
+    getAUser,deleteAUser, updateAUser, blockUser, unblockUser, updatePassword, forgotPasswordToken, resetPassword, uploadDocument,associateDocuments }

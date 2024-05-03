@@ -23,7 +23,7 @@ const InfoPersonnel = () => {
   }, []); 
 
   // Liste des clés à exclure
-  const excludedKeys = ["isBlocked", "password", "numPassport", "_id", "createdAt","updatedAt", "__v", "refreshToken","passwordResetToken", "passwordResetExpires"];
+  const excludedKeys = ["isBlocked", "uploadedDocuments" , "password", "numPassport", "_id", "createdAt","updatedAt", "__v", "refreshToken","passwordResetToken", "passwordResetExpires"];
 
   // Mapping des noms de propriétés en anglais vers leurs équivalents en français
   const frenchPropertyNames = {

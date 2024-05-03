@@ -5,6 +5,8 @@ const PORT = process.env.PORT || 4000;
 const bddConnect = require('./config/bddConnection');
 const authRouter = require("./routes/AuthentificationRoute");
 const contactRoutes = require("./routes/contactRoutes");
+const uploadRoutes = require("./routes/uploadRoutes");
+
 const bodyParser = require('body-parser');
 const morgan = require("morgan");
 const cors = require("cors");
@@ -26,6 +28,11 @@ app.use("/contact", contactRoutes);
 
 
 app.use("/api/user", authRouter);
+
+
+// Montage des routes de téléchargement de fichiers sur le préfixe '/api'
+app.use('/api/upload', uploadRoutes);
+
 
 app.listen(PORT,() => {
   console.log(`Serveur est en cours d'exécution dans le port ${PORT}`)
