@@ -63,6 +63,12 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
     },
+    AnneeScolaireEnCours: {
+        type: String,
+    },
+    groupe: {
+        type: String,
+    },
     ESISA: [{
         annee: {
             type: String,

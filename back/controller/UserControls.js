@@ -66,6 +66,8 @@ const loginUserControl = asyncHandler(async (req, res) => {
                 password: findUser?.password,
                 NumCneBac: findUser?.NumCneBac,
                 Sexe: findUser?.Sexe,
+                groupe: findUser?.groupe,
+
                 token: generateToken(findUser?.id),
             });
         } else {

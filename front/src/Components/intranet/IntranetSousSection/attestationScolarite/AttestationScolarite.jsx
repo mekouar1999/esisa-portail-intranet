@@ -8,7 +8,7 @@ function convertArrayBufferToString(arrayBuffer) {
 
 const Binary = {
   createFromBase64: function(base64) {
-    let base64String = base64;
+    let base64String = base64.data;
     if (typeof base64 === 'object' && base64.data && base64.data.data) {
       base64String = convertArrayBufferToString(base64.data.data);
     }

@@ -1,59 +1,118 @@
-import React from "react";
-import "./ReleveDeNotes.css"; // Importation du fichier CSS
-import logoReleve from "../../../../images/releve.png";
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Typography, Grid, Card, CardContent } from "@mui/material";
 
-const ReleveDeNotes = () => (
-  <div className="releve-de-notes-container">
-    <h2 className="title">Relevés de notes</h2>
-    <p className="descriptionrelevenotes">
-      Vous pouvez télécharger vos relevés de notes en cliquant sur les liens
-      ci-dessous
-    </p>
-    <TableContainer component={Paper}>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>Année</TableCell>
-            <TableCell>Semestre</TableCell>
-            <TableCell>Télécharger</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {relevesDeNotes.map((releve) => (
-            <TableRow key={releve.id}>
-              <TableCell>{releve.annee}</TableCell>
-              <TableCell>{releve.semestre}</TableCell>
-              <TableCell>
-                <a
-                  href={releve.link}
-                  className="download-link-releve"
-                  download
-                >
-                  Télécharger
-                </a>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-  </div>
-);
 
-const relevesDeNotes = [
-  { id: 1, annee: "Licence 1", semestre: "Semestre 1", link: "/releve-note-annee-1-semestre-1.pdf" },
-  { id: 2, annee: "Licence 1", semestre: "Semestre 2", link: "/releve-note-annee-1-semestre-2.pdf" },
-  { id: 3, annee: "Licence 2", semestre: "Semestre 1", link: "/releve-note-annee-2-semestre-1.pdf" },
-  { id: 4, annee: "Licence 2", semestre: "Semestre 2", link: "/releve-note-annee-2-semestre-2.pdf" },
-  { id: 5, annee: "Licence 3", semestre: "Semestre 1", link: "/releve-note-annee-3-semestre-1.pdf" },
-  { id: 6, annee: "Licence 3", semestre: "Semestre 2", link: "/releve-note-annee-3-semestre-2.pdf" },
-  { id: 7, annee: "Master 1", semestre: "Semestre 1", link: "/releve-note-annee-4-semestre-1.pdf" },
-  { id: 8, annee: "Master 1", semestre: "Semestre 2", link: "/releve-note-annee-4-semestre-2.pdf" },
-  { id: 9, annee: "Master 2", semestre: "Semestre 1", link: "/releve-note-annee-5-semestre-1.pdf" },
-  { id: 10, annee: "Master 2", semestre: "Semestre 2", link: "/releve-note-annee-5-semestre-2.pdf" },
-  // Ajoutez d'autres données de relevés de notes selon vos besoins
-];
+function convertArrayBufferToString(arrayBuffer) {
+  return new TextDecoder().decode(new Uint8Array(arrayBuffer));
+}
 
+const Binary = {
+  createFromBase64: function(base64) {
+    let base64String = base64.data;
+    console.log('Données base64 reçues :', convertArrayBufferToString(base64String)); // Log pour afficher les données base64
+
+    base64String = convertArrayBufferToString(base64String);
+
+    console.log('Chaîne base64 reçue :', base64String); // Log pour afficher la chaîne base64
+    if (!this.isBase64Encoded(base64String)) {
+      throw new Error('La chaîne base64 fournie n\'est pas correctement encodée.');
+    }
+
+    const binaryData = atob(base64String);
+    const byteArray = new Uint8Array(binaryData.length);
+    for (let i = 0; i < binaryData.length; i++) {
+      byteArray[i] = binaryData.charCodeAt(i);
+    }
+    return byteArray.buffer;
+  },
+
+  isBase64Encoded: function(str) {
+    try {
+      return btoa(atob(str)) === str;
+    } catch (err) {
+      return false;
+    }
+  }
+};
+
+const displayPDF = (base64String) => {
+  const binary = Binary.createFromBase64(base64String);
+  const byteArray = new Uint8Array(binary);
+  const blob = new Blob([byteArray], { type: 'application/pdf' });
+  const blobUrl = URL.createObjectURL(blob);
+  window.open(blobUrl);
+};
+
+const ReleveDeNotes = () => {
+  const [relevesDeNotes, setRelevesDeNotes] = useState([]);
+  const [responseError, setResponseError] = useState(null);
+
+  useEffect(() => {
+    const fetchRelevesDeNotes = async () => {
+      try {
+        const token = sessionStorage.getItem('token');
+        const userId = sessionStorage.getItem('_id');
+        const response = await axios.get(`http://localhost:4000/api/user/${userId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        console.log("Réponse des relevés de notes de l'utilisateur :", response.data);
+        setRelevesDeNotes(response.data.ESISA || []);
+      } catch (error) {
+        console.error('Erreur lors de la récupération des relevés de notes de l\'utilisateur :', error);
+        setResponseError(error.message);
+      }
+    };
+
+    fetchRelevesDeNotes();
+  }, []); 
+
+  return (
+    <div style={{ textAlign: "center" }} className="releve-de-notes-container">
+      {responseError && (
+        <div>
+          <Typography variant="body1" color="error">
+            Une erreur s'est produite lors de la récupération des relevés de notes : {responseError}
+          </Typography>
+        </div>
+      )}
+      <h2 className="title">Relevés de notes</h2>
+      <p className="description">
+        Vous pouvez télécharger vos relevés de notes en cliquant sur les liens ci-dessous :
+      </p>
+      <Grid container spacing={2}>
+        {relevesDeNotes.map((releve, index) => (
+          <Grid item xs={12} sm={6} md={4} key={index}>
+            <Card>
+              <CardContent style={{ backgroundColor: "rgb(193, 187, 216)" }}>
+                <Typography style={{ color: "white", fontWeight: "bold" }} variant="h6" gutterBottom className="title">
+                  Relevé de notes {releve.annee}
+                </Typography>
+                <Grid container spacing={1}>
+                  {[1, 2].map((semestre) => (
+                    <Grid item xs={12} key={semestre}>
+                      <Card style={{ margin: "auto" }} sx={{ marginBottom: 2 }}>
+                        <CardContent>
+                          <Typography style={{ marginBottom: "1rem" }} variant="h6" gutterBottom>
+                          Relevé de notes du Semestre {semestre}
+                          </Typography>
+                          <button onClick={() => displayPDF(releve[`releveNotesSemestre${semestre}`].data)}>
+                            Ouvrir le PDF
+                          </button>
+                        </CardContent>
+                      </Card>
+                    </Grid>
+                  ))}
+                </Grid>
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+    </div>
+  );
+};
 
 export default ReleveDeNotes;

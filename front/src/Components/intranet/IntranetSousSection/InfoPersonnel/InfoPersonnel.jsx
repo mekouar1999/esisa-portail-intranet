@@ -39,7 +39,9 @@ const InfoPersonnel = () => {
     email: 'Email',
     mobile: 'Téléphone',
     ESISA:"Année scolaire étudiées à l'ESISA",
-    _id:"Identifiant ESISA"
+    _id:"Identifiant ESISA",
+    AnneeScolaireEnCours :"Année scolaire en cours",
+    groupe: "Groupe"
   };
 
   // Fonction pour diviser le tableau en sous-tableaux de deux éléments chacun

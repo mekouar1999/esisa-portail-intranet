@@ -40,7 +40,9 @@ function InterfaceDeConnexion({ setIsLoggedIn }) {
         sessionStorage.setItem("token", response.data.token);
         sessionStorage.setItem("_id", response.data._id);
         sessionStorage.setItem("firstname", response.data.firstname);
+        sessionStorage.setItem("groupe", response.data.groupe);
 
+console.log("response data " , response.data)
         sessionStorage.setItem("isLoggedIn", true);
         navigate("/intranet");
       } else {
