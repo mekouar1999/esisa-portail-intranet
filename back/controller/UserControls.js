@@ -18,8 +18,8 @@ const CreateUser = async(req,res)=>{
     const findUser = await User.findOne({email:email});
     if(!findUser){
         const newUser = await User.create(req.body);
-        res.json({newUser})
-    } 
+        res.json("Utilisateur crée avec succés");  
+      } 
     else{
         res.json({
             msg:"Utilisateur Existant",
@@ -373,6 +373,7 @@ const blockUser = asyncHandler(async (req, res, next) => {
 
         // Récupérez l'ID de l'utilisateur à partir de req.user
         const { _id } = req.user;
+        console.log("ID de l'utilisateur extrait de req.user :", _id);
 
         // Traitez chaque champ de fichier
         const documents = [];
@@ -381,6 +382,7 @@ const blockUser = asyncHandler(async (req, res, next) => {
         fileFields.forEach(fieldName => {
             if (req.files[fieldName]) {
                 const files = req.files[fieldName];
+                console.log(`Nombre de fichiers pour le champ ${fieldName} :`, files.length);
                 files.forEach(file => {
                     documents.push({
                         user: _id, // Utilisez l'ID de l'utilisateur récupéré
@@ -390,6 +392,8 @@ const blockUser = asyncHandler(async (req, res, next) => {
                 });
             }
         });
+
+        console.log("Documents à enregistrer dans la base de données :", documents);
 
         // Enregistrez les documents dans la base de données
         const savedDocuments = await Document.insertMany(documents);
@@ -404,39 +408,103 @@ const blockUser = asyncHandler(async (req, res, next) => {
 };
 
 const associateDocuments = async (req, res) => {
-    try {
-        console.log("Requête d'association des documents reçue :", req.body);
+  console.log("Lancement de associate");
+  try {
+    console.log("Requête d'association des documents reçue :", req.body);
 
-        const { uploadedFiles } = req.body;
-        const userId = req.user._id; // Récupération de l'ID de l'utilisateur à partir de req.user
-
-        // Recherchez l'utilisateur dans la base de données
-        const user = await User.findById(userId);
-
-        console.log("Utilisateur trouvé :", user);
-
-        // Associez les fichiers téléchargés à l'utilisateur
-        uploadedFiles.forEach(file => {
-            user.uploadedDocumentsData.push({ data: file.data, fileType: file.fileType });
-        });
-
-        // Enregistrez les modifications apportées à l'utilisateur
-        await user.save();
-
-        console.log("Documents associés à l'utilisateur avec succès.");
-
-        res.status(200).send("Les documents ont été associés à l'utilisateur avec succès.");
-    } catch (error) {
-        console.error("Erreur lors de l'association des documents à l'utilisateur : ", error);
-        res.status(500).json({ error: 'Une erreur est survenue lors de l\'association des documents à l\'utilisateur.' });
+    // Vérifiez si uploadedFiles est défini dans la requête
+    if (!req.body.uploadedFiles || !Array.isArray(req.body.uploadedFiles)) {
+      console.log("Aucun fichier n'a été téléchargé.");
+      return res.status(400).json({ error: "Aucun fichier n'a été téléchargé." });
     }
+
+    const { uploadedFiles } = req.body;
+    const { _id } = req.user;
+
+    console.log("ID de l'utilisateur extrait de req.user :", _id);
+
+    const user = await User.findById(_id);
+
+    console.log("Utilisateur trouvé dans la base de données :", user);
+
+    if (!user) {
+      console.log("Utilisateur non trouvé dans la base de données.");
+      return res.status(404).json({ error: "Utilisateur non trouvé." });
+    }
+
+    // Assurez-vous que uploadedFiles est un tableau avant de l'itérer
+    if (!Array.isArray(uploadedFiles)) {
+      console.log("uploadedFiles n'est pas un tableau valide.");
+      return res.status(400).json({ error: "uploadedFiles n'est pas un tableau valide." });
+    }
+
+    // Ajoutez les identifiants des documents à uploadedDocuments de l'utilisateur
+    uploadedFiles.forEach(async (file) => {
+      try {
+        // Créez le document et récupérez son ID
+        const newDocument = await Document.create({
+          user: _id,
+          fileType: file.fileType,
+          fileData: file.fileData
+        });
+        // Ajoutez l'ID du document à uploadedDocuments de l'utilisateur
+        user.uploadedDocuments.push(newDocument._id);
+      } catch (error) {
+        console.error("Erreur lors de la création du document :", error);
+      }
+    });
+
+    // Enregistrez les modifications apportées à l'utilisateur
+    await user.save();
+
+    console.log("Documents associés à l'utilisateur avec succès.");
+
+    res.status(200).send("Les documents ont été associés à l'utilisateur avec succès.");
+  } catch (error) {
+    console.error("Erreur lors de l'association des documents à l'utilisateur : ", error);
+    res.status(500).json({ error: "Une erreur est survenue lors de l'association des documents à l'utilisateur." });
+  }
 };
 
+// Fonction pour obtenir les relevés de notes des années étudiées à l'ESISA pour un utilisateur donné
+
+
+
+const getRelevesNotesESISA = async (req, res) => {
+  try {
+      // Récupérez l'ID de l'utilisateur à partir de req.user
+      const userId = req.user._id;
+      console.log("ID de l'utilisateur extrait de req.user :", userId);
+
+      // Recherchez l'utilisateur dans la base de données
+      const user = await User.findById(userId);
+      if (!user) {
+          throw new Error("Utilisateur introuvable");
+      }
+
+      // Filtrer les relevés de notes pour les années étudiées à l'ESISA
+      const relevesNotesESISA = user.uploadedDocuments.filter(document => {
+          return user.ESISA.some(esisaYear => esisaYear.anneeEtudiee === document.annee);
+      });
+
+      res.json(relevesNotesESISA); // Répondez avec les relevés de notes de l'ESISA
+  } catch (error) {
+      console.error("Erreur lors de la récupération des relevés de notes de l'ESISA :", error);
+      res.status(500).json({ error: "Une erreur est survenue lors de la récupération des relevés de notes de l'ESISA." });
+  }
+};
+
+// Exemple d'utilisation de la fonction pour obtenir les relevés de notes de l'ESISA pour un utilisateur donné
+// Remarque : Vous n'avez pas besoin de passer l'ID de l'utilisateur comme argument
+
+
+
+
+
+
   
   
-  
-  module.exports = { uploadDocument, associateDocuments };
   
 
 module.exports = { CreateUser, loginUserControl, loginProf, handleRefreshToken, logout, getAllUser,
-    getAUser,deleteAUser, updateAUser, blockUser, unblockUser, updatePassword, forgotPasswordToken, resetPassword, uploadDocument,associateDocuments }
+    getAUser,deleteAUser, updateAUser, blockUser, unblockUser, updatePassword, forgotPasswordToken, resetPassword, uploadDocument,associateDocuments , getRelevesNotesESISA}

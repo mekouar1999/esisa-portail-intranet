@@ -2,10 +2,11 @@ const express = require('express');
 const router = express.Router();
 const { uploadDocument, associateDocuments } = require('../controller/UserControls');
 const multer = require('multer');
-const { authMiddleware } = require('../middlewares/authMiddleware'); // Importez le middleware d'authentification
+const { authMiddleware } = require('../middlewares/authMiddleware');
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
+
 
 // Endpoint pour télécharger des fichiers (pour 5 fichiers avec des noms différents)
 router.post('/', authMiddleware, upload.fields([

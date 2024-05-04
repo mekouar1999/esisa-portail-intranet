@@ -6,6 +6,7 @@ import "./InfoPersonnel.css";
 const InfoPersonnel = () => {
   const [userInfo, setUserInfo] = useState(null);
 
+  
   useEffect(() => {
     const token = sessionStorage.getItem('token');
     const userId = sessionStorage.getItem('_id');
@@ -23,7 +24,7 @@ const InfoPersonnel = () => {
   }, []); 
 
   // Liste des clés à exclure
-  const excludedKeys = ["isBlocked", "uploadedDocuments" , "password", "numPassport", "_id", "createdAt","updatedAt", "__v", "refreshToken","passwordResetToken", "passwordResetExpires"];
+  const excludedKeys = ["isBlocked", "uploadedDocuments" ,"uploadedDocumentsData", "password", "numPassport", "createdAt","updatedAt", "__v", "refreshToken","passwordResetToken", "passwordResetExpires"];
 
   // Mapping des noms de propriétés en anglais vers leurs équivalents en français
   const frenchPropertyNames = {
@@ -36,8 +37,9 @@ const InfoPersonnel = () => {
     role: 'Rôle',
     Sexe: 'Sexe',
     email: 'Email',
-    mobile: 'Téléphone'
-    // Ajoutez les autres propriétés au besoin
+    mobile: 'Téléphone',
+    ESISA:"Année scolaire étudiées à l'ESISA",
+    _id:"Identifiant ESISA"
   };
 
   // Fonction pour diviser le tableau en sous-tableaux de deux éléments chacun
@@ -72,7 +74,22 @@ const InfoPersonnel = () => {
           {chunk.map(([key, value]) => (
             <div key={key} className="info-personnel-container">
               <div className="info-item">
-                <span className="info-label">{frenchPropertyNames[key] || key}:</span> {value}
+                <span className="info-label">{frenchPropertyNames[key] || key}:</span>{" "}
+                {typeof value === 'string' && key !== "ESISA" ? (
+                  value
+                ) : (
+                  <div>
+                    {value.map((item, i) => (
+                      <div key={i}>
+                        <span>{item.annee}</span>
+                        {" - "}
+                        <span>{item.groupe}</span>
+                        {" - "}
+                        <span>{item.anneeScolaire}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           ))}
