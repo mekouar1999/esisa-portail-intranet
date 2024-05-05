@@ -37,10 +37,12 @@ app.use("/api/user", authRouter);
 app.use('/api/upload', uploadRoutes);
 
 
-app.listen(PORT,() => {
-  console.log(`Serveur est en cours d'exécution dans le port ${PORT}`)
-});
+
 
 // middlewares
 app.use(notFound);
 app.use(errorHandler);
+
+app.listen(PORT,() => {
+  console.log(`Serveur est en cours d'exécution dans le port ${PORT}`)
+});
