@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Typography, Grid, Card, CardContent } from "@mui/material";
+import { Typography, Grid, Card, CardContent , Button } from "@mui/material";
 
 
 function convertArrayBufferToString(arrayBuffer) {
@@ -82,7 +82,7 @@ const ReleveDeNotes = () => {
       <p className="description">
         Vous pouvez télécharger vos relevés de notes en cliquant sur les liens ci-dessous :
       </p>
-      <Grid container spacing={2}>
+      <Grid style={{ justifyContent: "center" , marginTop:"2rem" }} container spacing={2}>
         {relevesDeNotes.map((releve, index) => (
           <Grid item xs={12} sm={6} md={4} key={index}>
             <Card>
@@ -90,7 +90,7 @@ const ReleveDeNotes = () => {
                 <Typography style={{ color: "white", fontWeight: "bold" }} variant="h6" gutterBottom className="title">
                   Relevé de notes {releve.annee}
                 </Typography>
-                <Grid container spacing={1}>
+                <Grid  container spacing={1}>
                   {[1, 2].map((semestre) => (
                     <Grid item xs={12} key={semestre}>
                       <Card style={{ margin: "auto" }} sx={{ marginBottom: 2 }}>
@@ -98,9 +98,9 @@ const ReleveDeNotes = () => {
                           <Typography style={{ marginBottom: "1rem" }} variant="h6" gutterBottom>
                           Relevé de notes du Semestre {semestre}
                           </Typography>
-                          <button onClick={() => displayPDF(releve[`releveNotesSemestre${semestre}`].data)}>
-                            Ouvrir le PDF
-                          </button>
+                          <Button variant="contained" onClick={() => displayPDF(releve[`releveNotesSemestre${semestre}`].data)}>
+    Ouvrir le PDF
+</Button>
                         </CardContent>
                       </Card>
                     </Grid>

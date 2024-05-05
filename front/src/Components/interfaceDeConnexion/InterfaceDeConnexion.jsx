@@ -41,6 +41,9 @@ function InterfaceDeConnexion({ setIsLoggedIn }) {
         sessionStorage.setItem("_id", response.data._id);
         sessionStorage.setItem("firstname", response.data.firstname);
         sessionStorage.setItem("groupe", response.data.groupe);
+        sessionStorage.setItem("AnneeScolaireEnCours", response.data.AnneeScolaireEnCours);
+
+        
 
 console.log("response data " , response.data)
         sessionStorage.setItem("isLoggedIn", true);

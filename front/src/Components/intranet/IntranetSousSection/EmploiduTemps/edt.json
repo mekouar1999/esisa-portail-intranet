@@ -1,0 +1,73 @@
+{
+    "1ère année": {
+      "A": {
+        "chemin": "../../../../images/edt/1A.png"
+      },
+      "B": {
+        "chemin": "../../../../images/edt/1B.png"
+      },
+      "C": {
+        "chemin": "../../../../images/edt/1C.png"
+      },
+      "D": {
+        "chemin": "../../../../images/edt/1D.png"
+      }
+    },
+    "2ème année": {
+      "A": {
+        "chemin": "../../../../images/edt/2A.png"
+      },
+      "B": {
+        "chemin": "../../../../images/edt/2B.png"
+      },
+      "C": {
+        "chemin": "../../../../images/edt/2C.png"
+      },
+      "D": {
+        "chemin": "../../../../images/edt/2D.png"
+      }
+    },
+    "3ème année": {
+      "A": {
+        "chemin": "../../../../images/edt/3A.png"
+      },
+      "B": {
+        "chemin": "../../../../images/edt/3B.png"
+      },
+      "C": {
+        "chemin": "../../../../images/edt/3C.png"
+      },
+      "D": {
+        "chemin": "../../../../images/edt/3D.png"
+      }
+    },
+    "4ème année": {
+      "A": {
+        "chemin": "../../../../images/edt/4A.png"
+      },
+      "B": {
+        "chemin": "../../../../images/edt/4B.png"
+      },
+      "C": {
+        "chemin": "../../../../images/edt/4C.png"
+      },
+      "D": {
+        "chemin": "../../../../images/edt/4D.png"
+      }
+    },
+    "5ème année": {
+      "A": {
+        "chemin": "../../../../images/edt/5A.png"
+      },
+      "B": {
+        "chemin": "../../../../images/edt/5B.png"
+      },
+      "C": {
+        "chemin": "../../../../images/edt/5C.png"
+      },
+      "D": {
+        "chemin": "../../../../images/edt/5D.png"
+      }
+    }
+  }
+  

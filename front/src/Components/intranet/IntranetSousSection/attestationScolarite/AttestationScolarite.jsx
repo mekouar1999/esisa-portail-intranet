@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Typography, Grid, Card, CardContent } from "@mui/material";
+import { Typography, Grid, Card, CardContent , Button} from "@mui/material";
 
 function convertArrayBufferToString(arrayBuffer) {
   return new TextDecoder().decode(new Uint8Array(arrayBuffer));
@@ -80,7 +80,7 @@ const AttestationScolarite = () => {
       <p className="description">
         Vous pouvez télécharger vos attestations en cliquant sur les liens ci-dessous :
       </p>
-      <Grid container spacing={2}>
+      <Grid style={{ justifyContent: "center" , marginTop:"2rem" }}  container spacing={2}>
         {userAttestations.map((attestation, index) => (
           <Grid item xs={12} sm={6} md={4} key={index}>
             <Card>
@@ -97,9 +97,10 @@ const AttestationScolarite = () => {
                             Semestre {semestre}
                           </Typography>
                           {attestation[`AttestationScolariteSemestre${semestre}`] && (
-                            <button onClick={() => displayPDF(attestation[`AttestationScolariteSemestre${semestre}`])}>
+                            <Button variant="contained" onClick={() => displayPDF(attestation[`AttestationScolariteSemestre${semestre}`])}>
                               Ouvrir le PDF
-                            </button>
+                              </Button>
+
                           )}
                         </CardContent>
                       </Card>

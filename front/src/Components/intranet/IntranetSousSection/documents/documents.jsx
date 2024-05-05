@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./documents.css";
+import { Button } from '@mui/material';
 
 const Documents = () => {
   const [files, setFiles] = useState({
@@ -200,8 +201,7 @@ const Documents = () => {
                 : fileType.toUpperCase()}
             </label>
             {files[fileType] && (
-              <button onClick={handleUpload}>Télécharger</button>
-            )}
+              <Button style={{marginLeft:"1rem"}} variant="contained" onClick={handleUpload}>Envoyer</Button>            )}
           </div>
           <div style={{ textAlign: "center" }}>
             <input
@@ -228,12 +228,16 @@ const Documents = () => {
               >
                 {file.originalname}
               </a>
-              <button onClick={() => handleDownload(uploadedFiles, index)}>
-                Télécharger
-              </button>
-              <button onClick={() => file.url && handlePreviewPDF(file)}>
+          
+              <div style={{textAlign:"center"}}>
+              <Button variant="contained"  onClick={() => handleDownload(uploadedFiles, index)}>
+                Télécharger le fichier uploadé
+                </Button>
+
+              </div>
+              {/* <button onClick={() => file.url && handlePreviewPDF(file)}>
   Voir PDF
-</button>
+</button> */}
 
             </li>
           ))}

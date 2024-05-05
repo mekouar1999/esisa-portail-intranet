@@ -67,7 +67,7 @@ const loginUserControl = asyncHandler(async (req, res) => {
                 NumCneBac: findUser?.NumCneBac,
                 Sexe: findUser?.Sexe,
                 groupe: findUser?.groupe,
-
+                AnneeScolaireEnCours:findUser?.AnneeScolaireEnCours,
                 token: generateToken(findUser?.id),
             });
         } else {

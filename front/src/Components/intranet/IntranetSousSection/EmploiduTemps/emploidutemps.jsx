@@ -1,116 +1,170 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { Typography, Grid, Card, CardContent, CardMedia } from "@mui/material";
-import Button from '@mui/material/Button';
+import React from 'react';
+import emploiDuTempsJSON from './edt.json';
+import { Container, Typography, Button } from '@mui/material';
+import './emploidutemps.css'; // Fichier CSS pour les styles personnalisés
+import { saveAs } from 'file-saver'; // Importer la fonction saveAs pour le téléchargement
+import jsPDF from 'jspdf'; // Importer jsPDF pour la création du PDF
+import html2canvas from 'html2canvas'; // Importer html2canvas pour capturer l'image au format PDF
 
-function convertArrayBufferToString(arrayBuffer) {
-  return new TextDecoder().decode(new Uint8Array(arrayBuffer));
-}
 
-const Binary = {
-  createFromBase64: function(base64) {
-    let base64String = base64.data;
-    if (typeof base64 === 'object' && base64.data && base64.data.data) {
-      base64String = convertArrayBufferToString(base64.data.data);
-    }
-    console.log('Chaîne base64 reçue :', base64String); // Log pour afficher la chaîne base64
-    if (!this.isBase64Encoded(base64String)) {
-      throw new Error('La chaîne base64 fournie n\'est pas correctement encodée.');
-    }
-
-    const binaryData = atob(base64String);
-    const byteArray = new Uint8Array(binaryData.length);
-    for (let i = 0; i < binaryData.length; i++) {
-      byteArray[i] = binaryData.charCodeAt(i);
-    }
-    return byteArray.buffer;
-  },
-
-  isBase64Encoded: function(str) {
-    try {
-      return btoa(atob(str)) === str;
-    } catch (err) {
-      return false;
-    }
-  }
-};
-
-const displayPDF = (base64Data) => {
-  const binary = Binary.createFromBase64(base64Data);
-  const byteArray = new Uint8Array(binary);
-  const blob = new Blob([byteArray], { type: 'application/pdf' });
-  const blobUrl = URL.createObjectURL(blob);
-  window.open(blobUrl);
-};
-
+// Importer les images directement
+import edt1A from '../../../../images/edt/1A.png';
+import edt1B from '../../../../images/edt/1B.png';
+import edt1C from '../../../../images/edt/1C.png';
+import edt1D from '../../../../images/edt/1D.png';
+import edt2A from '../../../../images/edt/2A.png';
+import edt2B from '../../../../images/edt/2B.png';
+import edt2C from '../../../../images/edt/2C.png';
+import edt2D from '../../../../images/edt/2D.png';
+import edt3A from '../../../../images/edt/3A.png';
+import edt3B from '../../../../images/edt/3B.png';
+import edt3C from '../../../../images/edt/3C.png';
+import edt3D from '../../../../images/edt/3D.png';
+import edt4A from '../../../../images/edt/4A.png';
+import edt4B from '../../../../images/edt/4B.png';
+import edt4C from '../../../../images/edt/4C.png';
+import edt4D from '../../../../images/edt/4D.png';
+import edt5A from '../../../../images/edt/5A.png';
+import edt5B from '../../../../images/edt/5B.png';
+import edt5C from '../../../../images/edt/5C.png';
+import edt5D from '../../../../images/edt/5D.png';
 
 const EmploiDuTemps = () => {
-  const [userEmploisDuTemps, setUserEmploisDuTemps] = useState([]);
-  const [responseError, setResponseError] = useState(null);
+  // Récupérer le groupe et l'année du stockage de session
+  const groupe = sessionStorage.getItem('groupe');
+  const annee = sessionStorage.getItem('AnneeScolaireEnCours');
 
-  useEffect(() => {
-    const fetchUserEmploisDuTemps = async () => {
-      try {
-        const token = sessionStorage.getItem('token');
-        const userId = sessionStorage.getItem('_id');
-        const response = await axios.get(`http://localhost:4000/api/user/${userId}`, {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
-        console.log("Réponse des emplois du temps de l'utilisateur :", response.data);
-        setUserEmploisDuTemps(response.data.ESISA || []);
-      } catch (error) {
-        console.error('Erreur lors de la récupération des emplois du temps de l\'utilisateur :', error);
-        setResponseError(error.message);
-      }
-    };
+  // Vérifier si le groupe et l'année sont définis
+  if (!groupe || !annee) {
+    return (
+      <Container>
+        <Typography variant="h6" align="center">Veuillez sélectionner le groupe et l'année scolaire.</Typography>
+      </Container>
+    );
+  }
 
-    fetchUserEmploisDuTemps();
-  }, []); 
+  // Vérifier si le groupe et l'année existent dans le JSON
+  if (!emploiDuTempsJSON.hasOwnProperty(annee) || !emploiDuTempsJSON[annee].hasOwnProperty(groupe)) {
+    return (
+      <Container>
+        <Typography variant="h6" align="center">Impossible de trouver l'emploi du temps pour le groupe et l'année sélectionnés.</Typography>
+      </Container>
+    );
+  }
+
+  // Récupérer le chemin de l'image à partir du JSON
+  const cheminImage = emploiDuTempsJSON[annee][groupe].chemin;
+
+  // Utiliser les images directement
+  let imageSrc;
+  switch (cheminImage) {
+    case '../../../../images/edt/1A.png':
+      imageSrc = edt1A;
+      break;
+    case '../../../../images/edt/1B.png':
+      imageSrc = edt1B;
+      break;
+    case '../../../../images/edt/1C.png':
+      imageSrc = edt1C;
+      break;
+    case '../../../../images/edt/1D.png':
+      imageSrc = edt1D;
+      break;
+    case '../../../../images/edt/2A.png':
+      imageSrc = edt2A;
+      break;
+    case '../../../../images/edt/2B.png':
+      imageSrc = edt2B;
+      break;
+    case '../../../../images/edt/2C.png':
+      imageSrc = edt2C;
+      break;
+    case '../../../../images/edt/2D.png':
+      imageSrc = edt2D;
+      break;
+    case '../../../../images/edt/3A.png':
+      imageSrc = edt3A;
+      break;
+    case '../../../../images/edt/3B.png':
+      imageSrc = edt3B;
+      break;
+    case '../../../../images/edt/3C.png':
+      imageSrc = edt3C;
+      break;
+    case '../../../../images/edt/3D.png':
+      imageSrc = edt3D;
+      break;
+    case '../../../../images/edt/4A.png':
+      imageSrc = edt4A;
+      break;
+    case '../../../../images/edt/4B.png':
+      imageSrc = edt4B;
+      break;
+    case '../../../../images/edt/4C.png':
+      imageSrc = edt4C;
+      break;
+    case '../../../../images/edt/4D.png':
+      imageSrc = edt4D;
+      break;
+    case '../../../../images/edt/5A.png':
+      imageSrc = edt5A;
+      break;
+    case '../../../../images/edt/5B.png':
+      imageSrc = edt5B;
+      break;
+    case '../../../../images/edt/5C.png':
+      imageSrc = edt5C;
+      break;
+    case '../../../../images/edt/5D.png':
+      imageSrc = edt5D;
+      break;
+    default:
+      imageSrc = null;
+  }
+
+  const handleDownloadPDF = () => {
+    // Récupérer l'élément contenant l'image de l'emploi du temps
+    const edtImage = document.querySelector('.edt-image');
+  
+    // Vérifier si l'élément existe
+    if (edtImage) {
+      // Capturer l'élément au format PDF
+      html2canvas(edtImage).then(canvas => {
+        // Créer un objet jsPDF
+        const pdf = new jsPDF('l', 'mm', 'a4'); // Landscape orientation
+  
+        // Ajouter l'image capturée au PDF
+        pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0);
+  
+        // Télécharger le PDF
+        pdf.save('emploi_du_temps.pdf');
+      });
+    } else {
+      console.error('Erreur: Impossible de trouver l\'élément contenant l\'image de l\'emploi du temps.');
+    }
+  };
 
   return (
-    <div className="bulletins-container">
-      <div className="emploi-du-temps-container">
-        <div style={{ textAlign: "center" }}>
-          <h2 className="title">Emploi du temps</h2>
-          <p className="description">
-            Consultez votre emploi du temps en cliquant sur les liens ci-dessous :
-          </p>
-        </div>
-        <Grid container spacing={2}>
-          {userEmploisDuTemps.map((emploiDuTemps, index) => (
-            <Grid item xs={12} sm={6} md={3} key={index}>
-              <Card style={{ textAlign: "center" }}>
-                <CardContent style={{ backgroundColor: "rgb(193, 187, 216)" }}>
-                  <Typography style={{ marginBottom: "1rem" }} variant="h6" gutterBottom className="annee-link">
-                   Groupe {emploiDuTemps.groupe}
-                  </Typography>
-                  <Grid container spacing={1}>
-                    {[1, 2].map((semestre) => (
-                      <Grid item xs={12} key={semestre}>
-                        
-                          <CardContent>
-                            <Typography variant="h6" gutterBottom>
-                              Semestre {semestre}
-                            </Typography>
-                            <Typography variant="body2">
-                            <Button variant="contained" onClick={() => displayPDF(emploiDuTemps[`emploiDuTempsSemestre${semestre}`])}>
-  Ouvrir
-</Button>
-                            </Typography>
-                          </CardContent>
-                      </Grid>
-                    ))}
-                  </Grid>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-      </div>
-    </div>
+    <Container className="edt-container">
+      {/* Titre et description */}
+      <h2 className="title">Emploi du Temps</h2>
+      <p  className="description">
+        Vous pouvez télécharger votre emploi du temps en cliquant sur le bouton ci-dessous :
+      </p>
+      
+    
+      {/* Affichage de l'image de l'emploi du temps */}
+      {imageSrc && <img src={imageSrc} alt="Emploi du temps" className="edt-image" />}
+
+<div style={{textAlign:"center"}}>
+<Button style={{marginTop:"2rem"}} variant="contained" onClick={handleDownloadPDF}>Télécharger l'emploi du temps (PDF)</Button>
+
+</div>
+      
+    </Container>
+
+    
   );
-};
+}
 
 export default EmploiDuTemps;

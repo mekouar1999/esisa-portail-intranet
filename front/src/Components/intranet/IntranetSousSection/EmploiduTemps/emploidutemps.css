@@ -1,64 +1,38 @@
-.bulletins-container {
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
-  .title {
-    color: #003366;
-    margin-bottom: 20px;
-  }
-  
-  .description {
-    color: #666;
-    line-height: 1.6;
-  }
-  
-  .annee-link {
-    background-color: #ffffff;
-    color: #002353;
-    font-weight: bold;
-    font-size: 15px;
-    text-decoration: none;
-    border-radius: 10px;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    margin-bottom: 1rem;
-    box-shadow: 3px 5px 9px 7px rgba(0, 0, 0, 0.2);
-    padding: 10px 20px;
-  }
-  
-  .annee-link:hover {
-    background-color: #00223c;
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
-  }
-  
-  .download-link {
-    padding: 10px 20px;
-    background-color: #3f9fff;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .download-link:hover {
-    background-color: #001a33;
-  }
-  
-  @media (max-width: 768px) {
-    .download-link {
-      width: 55%;
-      padding: 8px 16px;
-      font-size: 0.9rem;
-    }
-  }
-  
-  @media screen and (min-width: 770px) and (max-width: 1100px) {
-    .annee-link {
-      margin-bottom: 1.5rem;
-      box-shadow: 3px 5px 9px 7px rgba(0, 0, 0, 0.2);
-      margin-left: 1.5rem;
-      margin-right: 1rem;
-    }
-  }
-  
+.edt-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Titre */
+.title {
+
+  text-align: center;
+}
+
+/* Description */
+.description {
+
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+
+
+
+.edt-image {
+  margin-top: 3rem;
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px; /* Coins arrondis */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Ombre douce */
+  transition: transform 0.3s ease; /* Animation de transition */
+
+  /* Effet de survol */
+  cursor: pointer;
+}
+
+.edt-image:hover {
+  transform: scale(1.05); /* Agrandir légèrement au survol */
+}
