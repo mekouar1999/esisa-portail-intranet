@@ -125,7 +125,7 @@ const Intranet = () => {
             }`}
           >
             <FaCalendarAlt className="sub-nav-icon" />
-            <span className="sub-nav-text">Emplois du temps</span>
+            <span className="sub-nav-text">EDT</span>
           </div>
           <div
             onClick={() => handleComponentChange("documents")}

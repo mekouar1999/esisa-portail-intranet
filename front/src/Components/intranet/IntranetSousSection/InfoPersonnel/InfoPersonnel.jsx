@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { FaUser } from "react-icons/fa";
 import "./InfoPersonnel.css";
+import Spinner from "../../../Spinner"; // Importez le composant Spinner
 
 const InfoPersonnel = () => {
   const [userInfo, setUserInfo] = useState(null);
+  const [loading, setLoading] = useState(true); // Ajoutez un état pour gérer le chargement des données
 
-  
   useEffect(() => {
     const token = sessionStorage.getItem('token');
     const userId = sessionStorage.getItem('_id');
@@ -17,9 +18,11 @@ const InfoPersonnel = () => {
     })
     .then(response => {
       setUserInfo(response.data);
+      setLoading(false); // Mettez fin au chargement lorsque les données sont récupérées
     })
     .catch(error => {
       console.error('Error fetching user info:', error);
+      setLoading(false); // Mettez fin au chargement en cas d'erreur
     });
   }, []); 
 
@@ -71,32 +74,38 @@ const InfoPersonnel = () => {
         </h2>
       </div>
 
-      {userInfoChunks.map((chunk, index) => (
-        <div key={index} className="flex">
-          {chunk.map(([key, value]) => (
-            <div key={key} className="info-personnel-container">
-              <div className="info-item">
-                <span className="info-label">{frenchPropertyNames[key] || key}:</span>{" "}
-                {typeof value === 'string' && key !== "ESISA" ? (
-                  value
-                ) : (
-                  <div>
-                    {value.map((item, i) => (
-                      <div key={i}>
-                        <span>{item.annee}</span>
-                        {" - "}
-                        <span>{item.groupe}</span>
-                        {" - "}
-                        <span>{item.anneeScolaire}</span>
-                      </div>
-                    ))}
-                  </div>
-                )}
+      {/* Affichez le Spinner pendant le chargement */}
+      {loading ? (
+        <Spinner />
+      ) : (
+        // Affichez les données une fois qu'elles sont chargées
+        userInfoChunks.map((chunk, index) => (
+          <div key={index} className="flex">
+            {chunk.map(([key, value]) => (
+              <div key={key} className="info-personnel-container">
+                <div className="info-item">
+                  <span className="info-label">{frenchPropertyNames[key] || key}:</span>{" "}
+                  {typeof value === 'string' && key !== "ESISA" ? (
+                    value
+                  ) : (
+                    <div>
+                      {value.map((item, i) => (
+                        <div key={i}>
+                          <span>{item.annee}</span>
+                          {" - "}
+                          <span>{item.groupe}</span>
+                          {" - "}
+                          <span>{item.anneeScolaire}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
-      ))}
+            ))}
+          </div>
+        ))
+      )}
     </>
   );
 };
