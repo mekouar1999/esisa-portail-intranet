@@ -23,6 +23,9 @@ app.use(morgan("dev"));
 app.use(cookieParser());
 app.use(cors());
 
+ app.use(cors({
+   origin: 'http://https://esisa-portail-intranet.vercel.app/'
+ }));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
