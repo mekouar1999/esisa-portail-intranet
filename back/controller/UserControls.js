@@ -323,7 +323,7 @@ const blockUser = asyncHandler(async (req, res, next) => {
     try {
       const token = await user.createpasswordResetToken();
       await user.save();
-      const resetURL = `Bonjour,<br><br>Veuillez suivre ce lien pour réinitialiser votre mot de passe. Ce lien est valide pendant 30 minutes à partir de maintenant :<br><br><a style="background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;" href='http://localhost:3000/api/user/reset-password/${token}'>Réinitialiser le mot de passe</a><br><br>Cordialement,<br> Core Team Support, ESISA`;
+      const resetURL = `Bonjour,<br><br>Veuillez suivre ce lien pour réinitialiser votre mot de passe. Ce lien est valide pendant 30 minutes à partir de maintenant :<br><br><a style="background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;" href='http://https://esisa-portail-intranet.vercel.app//api/user/reset-password/${token}'>Réinitialiser le mot de passe</a><br><br>Cordialement,<br> Core Team Support, ESISA`;
       const data = {
         to: email,
         text: "Hey ESISA INTRANET User",

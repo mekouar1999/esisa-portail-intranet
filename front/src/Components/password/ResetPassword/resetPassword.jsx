@@ -23,7 +23,7 @@ function ResetPassword() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:4000/api/user/forgot-Password-Token', formData)
+    axios.post('http://esisa-portail-intranet-back.vercel.app/api/user/forgot-Password-Token', formData)
       .then(response => {
         const { token } = response.data;
         toast.success('Réinitialisation du mot de passe réussie !'); // Afficher la notification de succès
