@@ -38,6 +38,9 @@ app.use('/api/upload', uploadRoutes);
 
 
 
+app.get('/', (req, res) => {
+  res.send('Bonjour, vous êtes sur la page d\'accueil !');
+});
 
 // middlewares
 app.use(notFound);
