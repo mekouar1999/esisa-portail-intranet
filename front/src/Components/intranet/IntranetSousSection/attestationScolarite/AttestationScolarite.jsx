@@ -53,7 +53,7 @@ const AttestationScolarite = () => {
       try {
         const token = sessionStorage.getItem('token');
         const userId = sessionStorage.getItem('_id');
-        const response = await axios.get(`http://esisa-portail-intranet-back.vercel.app/api/user/${userId}`, {
+        const response = await axios.get(`https://esisa-portail-intranet-back.vercel.app/api/user/${userId}`, {
           headers: {
             Authorization: `Bearer ${token}`
           }

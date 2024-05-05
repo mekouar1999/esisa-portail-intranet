@@ -34,7 +34,7 @@ const Documents = () => {
 
     try {
       const response = await axios.post(
-        "http://esisa-portail-intranet-back.vercel.app/api/upload",
+        "https://esisa-portail-intranet-back.vercel.app/api/upload",
         formData,
         {
           headers: {
@@ -67,7 +67,7 @@ const Documents = () => {
       }));
 
       const response = await axios.post(
-        "http://esisa-portail-intranet-back.vercel.app/api/upload/associate-documents",
+        "https://esisa-portail-intranet-back.vercel.app/api/upload/associate-documents",
         { uploadedFiles: filesArray },
         {
           headers: {
