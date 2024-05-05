@@ -105,3 +105,14 @@
 }
 
 
+
+.attestation-container {
+  text-align: center;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Ajustez la hauteur si nécessaire */
+}
