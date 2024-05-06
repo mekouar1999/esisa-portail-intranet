@@ -23,15 +23,15 @@ app.use(morgan("dev"));
 app.use(cookieParser());
 app.use(cors());
 
-app.use(cors({
-  origin: 'https://esisa-portail-intranet.vercel.app',
-  credentials: true // autorise les en-têtes d'authentification comme les cookies et les jetons
-}));
-
 // app.use(cors({
-//   origin: '*', // Autorise toutes les origines
-//   credentials: true // Autorise les en-têtes d'authentification comme les cookies et les jetons
+//   origin: 'https://esisa-portail-intranet.vercel.app',
+//   credentials: true // autorise les en-têtes d'authentification comme les cookies et les jetons
 // }));
+
+app.use(cors({
+  origin: '*', // Autorise toutes les origines
+  credentials: true // Autorise les en-têtes d'authentification comme les cookies et les jetons
+}));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
