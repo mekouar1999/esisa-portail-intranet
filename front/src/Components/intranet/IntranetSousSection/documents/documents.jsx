@@ -34,7 +34,9 @@ const Documents = () => {
 
     try {
       const response = await axios.post(
-        "https://esisa-portail-intranet-back.vercel.app/api/upload",
+         "https://esisa-portail-intranet-back.vercel.app/api/upload",
+       // "http://localhost:4000/api/upload",
+
         formData,
         {
           headers: {
@@ -67,7 +69,9 @@ const Documents = () => {
       }));
 
       const response = await axios.post(
-        "https://esisa-portail-intranet-back.vercel.app/api/upload/associate-documents",
+        // "https://esisa-portail-intranet-back.vercel.app/api/upload/associate-documents",
+        "http://localhost:4000/api/upload/associate-documents",
+
         { uploadedFiles: filesArray },
         {
           headers: {
@@ -113,7 +117,7 @@ const Documents = () => {
       <div className="centered-content">
         <h2 className="title">Documents universitaires</h2>
         <p className="description">
-          Mettez à jour vos documents en cliquant sur les liens ci-dessous :
+          Mettez à jour vos documents au format PDF en cliquant sur les liens ci-dessous :
         </p>
       </div>
 

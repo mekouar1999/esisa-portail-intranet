@@ -28,6 +28,11 @@ app.use(cors({
   credentials: true // autorise les en-têtes d'authentification comme les cookies et les jetons
 }));
 
+// app.use(cors({
+//   origin: '*', // Autorise toutes les origines
+//   credentials: true // Autorise les en-têtes d'authentification comme les cookies et les jetons
+// }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 

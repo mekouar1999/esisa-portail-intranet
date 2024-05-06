@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {
   FaEnvelope,
   FaFacebook,
-  FaTwitter,
+  FaYoutube,
   FaInstagram,
   FaLinkedin,
 } from "react-icons/fa";
@@ -33,7 +33,9 @@ const ContactezNous = () => {
 
     try {
       const response = await axios.post(
-        "https://esisa-portail-intranet-back.vercel.app/contact",
+         "https://esisa-portail-intranet-back.vercel.app/contact",
+      //  "http://localhost:4000/contact",
+
         formData
       );
 
@@ -152,28 +154,28 @@ const ContactezNous = () => {
       <div className="medias-contact-container">
         <div className="social-icons">
           <a
-            href="https://www.facebook.com/"
+            href="https://web.facebook.com/profile.php?id=100069321947366"
             target="_blank"
             rel="noopener noreferrer"
           >
             <FaFacebook className="social-icon" />
           </a>
           <a
-            href="https://twitter.com/"
+            href="https://www.youtube.com/@esisafesofficiel3275"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <FaTwitter className="social-icon" />
+            <FaYoutube className="social-icon" />
           </a>
           <a
-            href="https://www.instagram.com/"
+            href="https://www.instagram.com/esisa.ac.ma/?hl=fr"
             target="_blank"
             rel="noopener noreferrer"
           >
             <FaInstagram className="social-icon" />
           </a>
           <a
-            href="https://www.linkedin.com/"
+            href="https://www.linkedin.com/school/esisa/mycompany/?viewAsMember=true"
             target="_blank"
             rel="noopener noreferrer"
           >

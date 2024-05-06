@@ -24,7 +24,9 @@ function InterfaceDeConnexion({ setIsLoggedIn }) {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://esisa-portail-intranet-back.vercel.app/api/user/login",
+         "https://esisa-portail-intranet-back.vercel.app/api/user/login",
+      //  "http://localhost:4000/api/user/login",
+
         formData
       );
       console.log("Response from server:", response); // Log de la réponse du serveur
@@ -42,6 +44,7 @@ function InterfaceDeConnexion({ setIsLoggedIn }) {
         sessionStorage.setItem("firstname", response.data.firstname);
         sessionStorage.setItem("groupe", response.data.groupe);
         sessionStorage.setItem("AnneeScolaireEnCours", response.data.AnneeScolaireEnCours);
+        sessionStorage.setItem("lastname", response.data.lastname);
 
         
 
