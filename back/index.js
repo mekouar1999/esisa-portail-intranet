@@ -4,6 +4,8 @@ const dotenv = require('dotenv').config();
 const PORT = process.env.PORT || 4000;
 const bddConnect = require('./config/bddConnection');
 const authRouter = require("./routes/AuthentificationRoute");
+const StudentRouter = require("./routes/StudentRoutes");
+
 const contactRoutes = require("./routes/contactRoutes");
 const uploadRoutes = require("./routes/uploadRoutes");
 
@@ -40,6 +42,7 @@ app.use("/contact", contactRoutes);
 
 
 app.use("/api/user", authRouter);
+app.use("/api/student", StudentRouter);
 
 
 // Montage des routes de téléchargement de fichiers sur le préfixe '/api'

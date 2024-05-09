@@ -10,19 +10,26 @@ const AttestationScolarite = () => {
   const [loading, setLoading] = useState(false);
   const [responseError, setResponseError] = useState(null);
 
+
+    // State variables
+    const [relevesDeNotes, setRelevesDeNotes] = useState([]);
+    const [donneesRecues, setDonneesRecues] = useState({});
+
   const fetchAndGeneratePDF = async () => {
     try {
       const token = sessionStorage.getItem("token");
       const userId = sessionStorage.getItem("_id");
-      const firstname = sessionStorage.getItem("firstname");
-      const lastname = sessionStorage.getItem("lastname");
+      const Prénom = sessionStorage.getItem("Prénom");
+      const Nom = sessionStorage.getItem("Nom");
+      const Sexe = sessionStorage.getItem("Sexe");
+
 
       const groupe = sessionStorage.getItem("groupe");
       const AnneeScolaireEnCours = sessionStorage.getItem("AnneeScolaireEnCours");
 
       const response = await axios.get(
-        // `http://localhost:4000/api/user/${userId}`, 
-         `https://esisa-portail-intranet-back.vercel.app/api/user/${userId}`, 
+         `http://localhost:4000/api/user/${userId}`, 
+       //  `https://esisa-portail-intranet-back.vercel.app/api/user/${userId}`, 
 
         {
         headers: {
@@ -58,11 +65,17 @@ const AttestationScolarite = () => {
       // Texte d'attestation
       doc.setFont("helvetica", "normal");
       doc.setFontSize(12);
-      doc.text(`J'atteste par la présente que M. ${lastname} ${firstname} est inscrit à l'Ecole supérieur en ingénierie`, 20, 140);
-      doc.text(` et en sciences appliquées ( ESISA) pour l'année universitaire 2023/2024.`, 20, 150);
-      doc.text(`L'étudiant de l'ESISA ${firstname} est inscrit en ${AnneeScolaireEnCours} et est dans le groupe ${groupe}. Cette attestation`, 20, 160);
+   // Vérifie si le sexe est féminin
+if (Sexe === "F") {
+  doc.text(`J'atteste par la présente que Madame ${Nom} ${Prénom} est inscrite à l'École supérieure `, 20, 140);
+} else {
+  doc.text(`J'atteste par la présente que Monsieur ${Nom} ${Prénom} est inscrit à l'École supérieure `, 20, 140);
+}
 
-      doc.text(" est conforme aux droits et règlements de l'ESISA.", 20, 170);
+doc.text(`en ingénierie et en sciences appliquées (ESISA) pour l'année universitaire 2023/2024.`, 20, 150);
+doc.text(`L'étudiant${Sexe === "F" ? "e" : ""} ${Prénom} est inscrit${Sexe === "F" ? "e" : ""} en ${donneesRecues.annee}${donneesRecues.annee === "1" ? "ère" : "ème"} année, dans le groupe ${groupe}. `, 20, 160);
+
+      doc.text("Cette attestation est conforme aux droits et règlements de l'ESISA.", 20, 170);
 
       // Signature
       doc.setFont("helvetica", "bold");
@@ -83,6 +96,38 @@ const AttestationScolarite = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    const fetchRelevesDeNotes = async () => {
+      try {
+        const userId = sessionStorage.getItem("_id");
+        const Prénom = sessionStorage.getItem("Prénom");
+        const Nom = sessionStorage.getItem("Nom");
+        const groupe = sessionStorage.getItem("groupe");
+        const AnneeScolaireEnCours = sessionStorage.getItem("AnneeScolaireEnCours");
+        const token = sessionStorage.getItem('token');
+        const cin = sessionStorage.getItem('cin');
+        const response = await axios.get(
+          `http://localhost:4000/api/student/${cin}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          }
+        );
+        console.log("Réponse des relevés de notes de l'utilisateur :", response.data);
+        setDonneesRecues(response.data);
+        setRelevesDeNotes(response.data.ESISA || []);
+        setLoading(false);
+      } catch (error) {
+        console.error('Erreur lors de la récupération des relevés de notes de l\'utilisateur :', error);
+        setResponseError(error.message);
+        setLoading(false);
+      }
+    };
+
+    fetchRelevesDeNotes();
+  }, []);
 
 
   const handleGeneratePDF = () => {

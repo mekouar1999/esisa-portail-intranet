@@ -4,7 +4,7 @@ const nodemailer = require("nodemailer");
 
 router.post("/", async (req, res) => {
   try {
-    const { subject, nom, prenom, classe, groupe, message } = req.body;
+    const { subject, nom, Prénom, classe, groupe, message } = req.body;
 
 // Envoi d'un e-mail avec nodemailer
 const transporter = nodemailer.createTransport({
@@ -25,7 +25,7 @@ const mailOptions = {
         <div style="background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
           <p style="font-size: 16px; margin-bottom: 10px;"><strong>Sujet:</strong> ${subject}</p>
           <p style="font-size: 16px; margin-bottom: 10px;"><strong>Nom:</strong> ${nom}</p>
-          <p style="font-size: 16px; margin-bottom: 10px;"><strong>Prénom:</strong> ${prenom}</p>
+          <p style="font-size: 16px; margin-bottom: 10px;"><strong>Prénom:</strong> ${Prénom}</p>
           <p style="font-size: 16px; margin-bottom: 10px;"><strong>Classe:</strong> ${classe}</p>
           <p style="font-size: 16px; margin-bottom: 10px;"><strong>Groupe:</strong> ${groupe}</p>
           <p style="font-size: 16px; margin-bottom: 0;"><strong>Message:</strong> ${message}</p>

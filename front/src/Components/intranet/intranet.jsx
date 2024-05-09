@@ -23,7 +23,7 @@ const Intranet = () => {
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const [showNav, setShowNav] = useState(false); // Ajout de l'état local pour contrôler l'affichage de la navigation
   const navigate = useNavigate();
-  const firstName = sessionStorage.getItem("firstname");
+  const Prénom = sessionStorage.getItem("Prénom");
 
   const handleComponentChange = (component) => {
     setSelectedComponent(component);
@@ -79,7 +79,7 @@ const Intranet = () => {
         {/* Ajout de la classe show pour afficher la navigation sur les appareils mobiles */}
         <FaBars className="toggle-nav" onClick={() => setShowNav(!showNav)} />{" "}
         {/* Toggle pour afficher/cacher la navigation sur les appareils mobiles */}
-        <h2 className="nomPersMenu">Bonjour {firstName} 😊 </h2>
+        <h2 className="nomPersMenu">Bonjour {Prénom} 😊 </h2>
         {/* Les éléments de navigation restent inchangés */}
         <div
           onClick={() => handleComponentChange("infoPersonnel")}

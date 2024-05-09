@@ -12,8 +12,8 @@ import "./ContactezNous.css"; // Importation du fichier CSS
 const ContactezNous = () => {
   const [formData, setFormData] = useState({
     subject: "",
-    nom: "",
-    prenom: "",
+    Nom: "",
+    Prénom: "",
     classe: "",
     groupe: "",
     message: "",
@@ -33,8 +33,8 @@ const ContactezNous = () => {
 
     try {
       const response = await axios.post(
-         "https://esisa-portail-intranet-back.vercel.app/contact",
-      //  "http://localhost:4000/contact",
+       //  "https://esisa-portail-intranet-back.vercel.app/contact",
+        "http://localhost:4000/contact",
 
         formData
       );
@@ -43,8 +43,8 @@ const ContactezNous = () => {
       setSuccessMessage("Message transmis avec succès!");
       setFormData({
         subject: "",
-        nom: "",
-        prenom: "",
+        Nom: "",
+        Prénom: "",
         classe: "",
         groupe: "",
         message: "",
@@ -91,10 +91,10 @@ const ContactezNous = () => {
           <div className="form-group">
             <input
               type="text"
-              id="nom"
-              name="nom"
+              id="Nom"
+              name="Nom"
               placeholder="Nom"
-              value={formData.nom}
+              value={formData.Nom}
               onChange={handleChange}
               className="input"
             />
@@ -102,10 +102,10 @@ const ContactezNous = () => {
           <div className="form-group">
             <input
               type="text"
-              id="prenom"
-              name="prenom"
+              id="Prénom"
+              name="Prénom"
               placeholder="Prénom"
-              value={formData.prenom}
+              value={formData.Prénom}
               onChange={handleChange}
               className="input"
             />

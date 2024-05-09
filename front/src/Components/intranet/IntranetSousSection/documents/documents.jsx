@@ -34,8 +34,8 @@ const Documents = () => {
 
     try {
       const response = await axios.post(
-         "https://esisa-portail-intranet-back.vercel.app/api/upload",
-       // "http://localhost:4000/api/upload",
+       //  "https://esisa-portail-intranet-back.vercel.app/api/upload",
+        "http://localhost:4000/api/upload",
 
         formData,
         {

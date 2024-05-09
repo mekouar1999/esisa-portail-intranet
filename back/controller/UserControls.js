@@ -27,13 +27,14 @@ const CreateUser = async(req,res)=>{
         })
     }
 }
+
 const loginUserControl = asyncHandler(async (req, res) => {
-    const { NumCardId, password } = req.body;
-    console.log("NumCardId from request:", NumCardId);
+    const { cin, password } = req.body;
+    console.log("cin from request:", cin);
     console.log("Password from request:", password);
 
     // Vérifier si l'utilisateur existe ou non
-    const findUser = await User.findOne({ NumCardId });
+    const findUser = await User.findOne({ cin });
     console.log("User found in database:", findUser);
 
     if (findUser) {
@@ -56,12 +57,12 @@ const loginUserControl = asyncHandler(async (req, res) => {
 
             res.json({
                 _id: findUser?.id,
-                firstname: findUser?.firstname, 
-                lastname: findUser?.lastname,
-                NumCardId: findUser?.NumCardId,
+                Prénom: findUser?.Prénom, 
+                Nom: findUser?.Nom,
+                cin: findUser?.cin,
                 email: findUser?.email,
                 mobile: findUser?.mobile,
-                datedeNaissance: findUser?.datedeNaissance,
+                Date_Naissance: findUser?.Date_Naissance,
                 PaysOrigine: findUser?.PaysOrigine,
                 password: findUser?.password,
                 NumCneBac: findUser?.NumCneBac,
@@ -102,8 +103,8 @@ const loginProf = asyncHandler(async (req, res) => {
       });
       res.json({
         _id: findAdmin?._id,
-        firstname: findAdmin?.firstname,
-        lastname: findAdmin?.lastname,
+        Prénom: findAdmin?.Prénom,
+        Nom: findAdmin?.Nom,
         email: findAdmin?.email,
         mobile: findAdmin?.mobile,
         token: generateToken(findAdmin?._id),
@@ -186,6 +187,8 @@ const loginProf = asyncHandler(async (req, res) => {
   
   // get A user
   
+
+
   const getAUser = asyncHandler(async (req, res) => {
     const { id } = req.params;
     console.log(id);
@@ -196,6 +199,8 @@ const loginProf = asyncHandler(async (req, res) => {
       throw new Error(error);
     }
   });
+
+
   
   // delete A user
   
@@ -228,8 +233,8 @@ const loginProf = asyncHandler(async (req, res) => {
         //id pour le param quon recuperer depuis le params
         _id,
         {
-          firstname: req?.body?.firstname,
-          lastname: req?.body?.lastname,
+          Prénom: req?.body?.Prénom,
+          Nom: req?.body?.Nom,
           email: req?.body?.email,
           phone: req?.body?.phone,
           password: req?.body?.password,

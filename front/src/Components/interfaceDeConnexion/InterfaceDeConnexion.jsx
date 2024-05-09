@@ -6,7 +6,7 @@ import "./InterfaceDeConnexion.css"; // Importation du fichier CSS
 
 function InterfaceDeConnexion({ setIsLoggedIn }) {
   const [formData, setFormData] = useState({
-    NumCardId: "",
+    cin: "",
     password: "",
   });
   const [error, setError] = useState("");
@@ -24,27 +24,30 @@ function InterfaceDeConnexion({ setIsLoggedIn }) {
     e.preventDefault();
     try {
       const response = await axios.post(
-         "https://esisa-portail-intranet-back.vercel.app/api/user/login",
-      //  "http://localhost:4000/api/user/login",
+      //   "https://esisa-portail-intranet-back.vercel.app/api/user/login",
+        "http://localhost:4000/api/user/login",
 
         formData
       );
-      console.log("Response from server:", response); // Log de la réponse du serveur
-
+      console.log("Response from server:", response);  
       // Après la vérification de l'identifiant et du mot de passe
       if (response.data && response.data.token) {
         setIsLoggedIn(true);
         setFormData({
-          NumCardId: "",
+          cin: "",
           password: "",
         });
         // Stocke le token dans sessionStorage
         sessionStorage.setItem("token", response.data.token);
         sessionStorage.setItem("_id", response.data._id);
-        sessionStorage.setItem("firstname", response.data.firstname);
+        sessionStorage.setItem("Prénom", response.data.Prénom);
         sessionStorage.setItem("groupe", response.data.groupe);
         sessionStorage.setItem("AnneeScolaireEnCours", response.data.AnneeScolaireEnCours);
-        sessionStorage.setItem("lastname", response.data.lastname);
+        sessionStorage.setItem("Nom", response.data.Nom);
+        sessionStorage.setItem("cin", response.data.cin);
+        sessionStorage.setItem("Sexe", response.data.Sexe);
+
+
 
         
 
@@ -77,8 +80,8 @@ console.log("response data " , response.data)
             <h2 className="input-label">Identifiant :</h2>
             <input
               type="text"
-              name="NumCardId"
-              value={formData.NumCardId}
+              name="cin"
+              value={formData.cin}
               onChange={handleChange}
               className="input-field"
             />

@@ -12,8 +12,8 @@ const InfoPersonnel = () => {
     const token = sessionStorage.getItem('token');
     const userId = sessionStorage.getItem('_id');
     axios.get(
-       `https://esisa-portail-intranet-back.vercel.app/api/user/${userId}`,
-     // `http://localhost:4000/api/user/${userId}`,
+    //   `https://esisa-portail-intranet-back.vercel.app/api/user/${userId}`,
+      `http://localhost:4000/api/user/${userId}`,
 
       {
       headers: {
@@ -31,16 +31,16 @@ const InfoPersonnel = () => {
   }, []); 
 
   // Liste des clés à exclure
-  const excludedKeys = ["isBlocked", "uploadedDocuments" ,"uploadedDocumentsData", "password", "numPassport", "createdAt","updatedAt", "__v", "refreshToken","passwordResetToken", "passwordResetExpires"];
+  const excludedKeys = ["isBlocked", "ESISA","_id", "uploadedDocuments" ,"uploadedDocumentsData", "password", "numPassport", "createdAt","updatedAt", "__v", "refreshToken","passwordResetToken", "passwordResetExpires"];
 
   // Mapping des noms de propriétés en anglais vers leurs équivalents en français
   const frenchPropertyNames = {
-    firstname: 'Prénom',
-    lastname: 'Nom',
-    datedeNaissance: 'Date de Naissance',
+    Prénom: 'Prénom',
+    nom: 'Nom',
+    Date_Naissance: 'Date de Naissance',
     PaysOrigine: 'Pays d\'Origine',
     NumCneBac: 'Numéro CNE Bac',
-    NumCardId: 'Numéro Carte d\'Identité',
+    cin: 'Numéro Carte d\'Identité',
     role: 'Rôle',
     Sexe: 'Sexe',
     email: 'Email',
@@ -48,7 +48,8 @@ const InfoPersonnel = () => {
     ESISA:"Année scolaire étudiées à l'ESISA",
     _id:"Identifiant ESISA",
     AnneeScolaireEnCours :"Année scolaire en cours",
-    groupe: "Groupe"
+    groupe: "Groupe",
+    isBlocked:"Interdit d'activité"
   };
 
   // Fonction pour diviser le tableau en sous-tableaux de deux éléments chacun

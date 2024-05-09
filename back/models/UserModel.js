@@ -3,27 +3,27 @@ const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 
 const userSchema = new mongoose.Schema({
-    firstname: {
+    
+    Prénom: {
         type: String,
         required: true,
     },
-    lastname: {
+    Nom: {
         type: String,
         required: true,
     },
-    datedeNaissance: {
+    Date_Naissance: {
         type: String,
         required: true,
     },
     PaysOrigine: {
         type: String,
-        required: true,
+        default :"Maroc"
     },
     NumCneBac: {
         type: String,
-        required: true,
     },
-    NumCardId: {
+    cin: {
         type: String,
         required: true,
         unique: true,
@@ -52,16 +52,17 @@ const userSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: true,
         unique: true,
+        default :"etudiantEsisa@gmail.com"
     },
     mobile: {
         type: String,
-        required: true,
-        unique: true,
+        default :"0661626587"
     },
     password: {
         type: String,
+        default :"123456"
+
     },
     AnneeScolaireEnCours: {
         type: String,
@@ -69,6 +70,7 @@ const userSchema = new mongoose.Schema({
     groupe: {
         type: String,
     },
+
     ESISA: [{
         annee: {
             type: String,
@@ -81,41 +83,12 @@ const userSchema = new mongoose.Schema({
         anneeScolaire: {
             type: String,
             required: true,
-        },
-        bulletinSemestre1: {
-            data: Buffer,
-            contentType: String,
-        },
-        bulletinSemestre2: {
-            data: Buffer,
-            contentType: String,
-        },
-        releveNotesSemestre1: {
-            data: Buffer,
-            contentType: String,
-        },
-        releveNotesSemestre2: {
-            data: Buffer,
-            contentType: String,
-        },
-        emploiDuTempsSemestre1: {
-            data: Buffer,
-            contentType: String,
-        },
-        emploiDuTempsSemestre2: {
-            data: Buffer,
-            contentType: String,
-        },
-        AttestationScolariteSemestre1: {
-            data: Buffer,
-            contentType: String,
-        },
-        AttestationScolariteSemestre2: {
-            data: Buffer,
-            contentType: String,
-        },
+        }
     }]
-}, {
+   
+},
+
+{
     timestamps: true,
 });
 
