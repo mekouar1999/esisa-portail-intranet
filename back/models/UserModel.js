@@ -25,8 +25,12 @@ const userSchema = new mongoose.Schema({
     },
     cin: {
         type: String,
-        required: true,
-        unique: true,
+    },
+    NumCardId: {
+        type: String,
+        default :"none",
+        unique:false
+
     },
     uploadedDocuments: [{
         type: mongoose.Schema.Types.ObjectId,

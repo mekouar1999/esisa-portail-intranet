@@ -25,8 +25,8 @@ function ChangePasswordPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios.put(
-     //  `https://esisa-portail-intranet-back.vercel.app/api/user/reset-Password/${token}`, formData)
-      `http://localhost:4000/api/user/reset-Password/${token}`, formData)
+       `https://esisa-portail-intranet-back.vercel.app/api/user/reset-Password/${token}`, formData)
+     // `http://localhost:4000/api/user/reset-Password/${token}`, formData)
 
       .then(response => {
         toast.success('Mot de passe changé avec succès !'); // Afficher la notification de succès

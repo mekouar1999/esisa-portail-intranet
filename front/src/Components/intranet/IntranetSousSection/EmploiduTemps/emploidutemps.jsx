@@ -33,7 +33,7 @@ const EmploiDuTemps = () => {
 
   const [loading, setLoading] = useState(true);
   const [responseError, setResponseError] = useState(null);
-  const [donneesRecues, setDonneesRecues] = useState("1"); // Initialize with null
+  const [donneesRecues, setDonneesRecues] = useState(null); // Initialize with null
   useEffect(() => {
     const fetchRelevesDeNotes = async () => {
       try {
@@ -170,27 +170,30 @@ switch (cheminImage) {
 // Utilisation de imageSrc pour afficher l'image correspondante...
 
 
-  const handleDownloadPDF = () => {
-    // Récupérer l'élément contenant l'image de l'emploi du temps
-    const edtImage = document.querySelector('.edt-image');
-  
-    // Vérifier si l'élément existe
-    if (edtImage) {
-      // Capturer l'élément au format PDF
-      html2canvas(edtImage).then(canvas=> {
-        // Créer un objet jsPDF
-        const pdf = new jsPDF('l', 'mm', 'a4'); // Landscape orientation
-  
-        // Ajouter l'image capturée au PDF
-        pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0);
-  
-        // Télécharger le PDF
-        pdf.save('emploi_du_temps.pdf');
-      });
-    } else {
-      console.error('Erreur: Impossible de trouver l\'élément contenant l\'image de l\'emploi du temps.');
-    }
-  };
+const handleDownloadPDF = () => {
+  // Récupérer l'élément contenant l'image de l'emploi du temps
+  const edtImage = document.querySelector('.edt-image');
+
+  // Vérifier si l'élément existe
+  if (edtImage) {
+    // Capturer l'élément au format PDF
+    html2canvas(edtImage).then(canvas => {
+      // Créer un objet jsPDF
+      const pdf = new jsPDF('l', 'mm', 'a4'); // Landscape orientation
+
+      // Ajouter l'image capturée au PDF
+      const imgData = canvas.toDataURL('image/png');
+      const imgWidth = 210; // Largeur de la page A4 en mm
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+
+      // Télécharger le PDF
+      pdf.save('emploi_du_temps.pdf');
+    });
+  } else {
+    console.error('Erreur: Impossible de trouver l\'élément contenant l\'image de l\'emploi du temps.');
+  }
+};
 
   return (
     <Container className="edt-container">

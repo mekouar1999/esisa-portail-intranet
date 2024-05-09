@@ -12,8 +12,8 @@ const InfoPersonnel = () => {
     const token = sessionStorage.getItem('token');
     const userId = sessionStorage.getItem('_id');
     axios.get(
-    //   `https://esisa-portail-intranet-back.vercel.app/api/user/${userId}`,
-      `http://localhost:4000/api/user/${userId}`,
+       `https://esisa-portail-intranet-back.vercel.app/api/user/${userId}`,
+    //  `http://localhost:4000/api/user/${userId}`,
 
       {
       headers: {
