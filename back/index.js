@@ -35,6 +35,14 @@ app.use(cors({
 //   credentials: true // Autorise les en-têtes d'authentification comme les cookies et les jetons
 // }));
 
+// const corsOptions = {
+//   origin: ['http://localhost:3000', 'https://esisa-portail-intranet.vercel.app'],
+//   credentials: true // Autorise les en-têtes d'authentification comme les cookies et les jetons
+// };
+
+// app.use(cors(corsOptions));
+
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 

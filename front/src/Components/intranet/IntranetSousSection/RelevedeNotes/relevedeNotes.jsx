@@ -25,7 +25,7 @@ const ReleveDeNotes = () => {
         const token = sessionStorage.getItem('token');
         const cin = sessionStorage.getItem('cin');
         const response = await axios.get(
-          `http://localhost:4000/api/student/${cin}`,
+          `https://esisa-portail-intranet-back.vercel.app/api/student/${cin}`,
           {
             headers: {
               Authorization: `Bearer ${token}`
