@@ -40,7 +40,7 @@ app.use(cors({
 //   credentials: true // Autorise les en-têtes d'authentification comme les cookies et les jetons
 // };
 
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 
 
 app.use(express.json());

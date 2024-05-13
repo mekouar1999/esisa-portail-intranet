@@ -320,6 +320,7 @@ const blockUser = asyncHandler(async (req, res, next) => {
   });
   
   const forgotPasswordToken = asyncHandler(async (req, res) => {
+    
     const { email } = req.body;
     const user = await User.findOne({ email });
     if (!user) {

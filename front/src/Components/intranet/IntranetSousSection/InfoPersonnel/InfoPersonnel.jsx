@@ -6,14 +6,14 @@ import Spinner from "../../../Spinner"; // Importez le composant Spinner
 
 const InfoPersonnel = () => {
   const [userInfo, setUserInfo] = useState(null);
-  const [loading, setLoading] = useState(true); // Ajoutez un état pour gérer le chargement des données
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
     const token = sessionStorage.getItem('token');
     const userId = sessionStorage.getItem('_id');
     axios.get(
        `https://esisa-portail-intranet-back.vercel.app/api/user/${userId}`,
-    //  `http://localhost:4000/api/user/${userId}`,
+    // `http://localhost:4000/api/user/${userId}`,
 
       {
       headers: {
@@ -31,7 +31,7 @@ const InfoPersonnel = () => {
   }, []); 
 
   // Liste des clés à exclure
-  const excludedKeys = ["isBlocked", "ESISA","_id", "uploadedDocuments" ,"uploadedDocumentsData", "password", "numPassport", "createdAt","updatedAt", "__v", "refreshToken","passwordResetToken", "passwordResetExpires"];
+  const excludedKeys = ["isBlocked","NumCardId", "role", "ESISA","_id", "uploadedDocuments" ,"uploadedDocumentsData", "password", "numPassport", "createdAt","updatedAt", "__v", "refreshToken","passwordResetToken", "passwordResetExpires"];
 
   // Mapping des noms de propriétés en anglais vers leurs équivalents en français
   const frenchPropertyNames = {

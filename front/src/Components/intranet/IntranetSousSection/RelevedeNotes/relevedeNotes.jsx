@@ -26,13 +26,14 @@ const ReleveDeNotes = () => {
         const cin = sessionStorage.getItem('cin');
         const response = await axios.get(
           `https://esisa-portail-intranet-back.vercel.app/api/student/${cin}`,
+        //  `http://localhost:4000/api/student/${cin}`,
+
           {
             headers: {
               Authorization: `Bearer ${token}`
             }
           }
         );
-        console.log("Réponse des relevés de notes de l'utilisateur :", response.data);
         setDonneesRecues(response.data);
         setRelevesDeNotes(response.data.ESISA || []);
         setLoading(false);
@@ -227,7 +228,7 @@ notes.forEach(item => {
 
       doc.text(`Fait à Fès, le : ${date}`, 150, 20);      
   
-      doc.text(`L'étudiant${data.Sexe === "F" ? "e" : ""} ${Prénom} ${Nom}, né${data.Sexe === "F" ? "e" : ""} le ${data.Date_Naissance} à ${data.Lieu_Naissance}, est inscrit${data.Sexe === "F" ? "e" : ""} en ${donneesRecues.annee}${donneesRecues.annee === "1" ? "ère" : "ème"} année, groupe ${groupe} à l'ESISA. `, 20, 60);
+      doc.text(`L'étudiant${data.Sexe === "F" ? "e" : ""} ${Prénom} ${Nom}, né${data.Sexe === "F" ? "e" : ""} le ${data.Date_Naissance} à ${data.Lieu_Naissance}, est inscrit${data.Sexe === "F" ? "e" : ""} en ${parseInt(donneesRecues.annee) + 1}${donneesRecues.annee === "1" ? "ère" : "ème"} année, groupe ${groupe} à l'ESISA. `, 20, 60);
       doc.text("Ce relevé comprends les résultats obtenus pour le Semestre 1 et 2 de l'année scolaire 2022-2023.\n", 20, 65);
       doc.text("Ce document est conforme aux droits et règlements de l'ESISA.", 20, 70);
       doc.text("Pour toute autre demandes, nous vous prions de contacter le service administrative l'ESISA.", 20, 75);
@@ -284,8 +285,14 @@ notes.forEach(item => {
             ))}
           </Grid>
           <div style={{ marginTop: "20px" }}>
-            <Button variant="contained" onClick={handleDownloadPDF}>Télécharger le relevé de notes</Button>
+            <Button variant="contained" onClick={handleDownloadPDF}>Relevé de notes - Année universitaire 2022-2023 </Button>
           </div>
+          <div style={{ marginTop: "20px" }}>
+  <Button variant="contained" disabled>
+    Relevé de notes - Année universitaire 2023-2024
+  </Button>
+</div>
+
         </div>
       )}
     </div>

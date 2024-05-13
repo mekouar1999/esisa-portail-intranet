@@ -8,6 +8,7 @@ import {
   FaCalendarAlt,
   FaSignOutAlt,
   FaBars,
+  FaGraduationCap
 } from "react-icons/fa"; // Ajout de l'icône FaBars
 import InfoPersonnel from "./IntranetSousSection/InfoPersonnel/InfoPersonnel";
 import ContactezNous from "./IntranetSousSection/ContactezNous/contactezNous";
@@ -17,6 +18,7 @@ import Event from "./IntranetSousSection/Events/event";
 import Documents from "./IntranetSousSection/documents/documents";
 import "./intranet.css";
 import EmploiDuTemps from "./IntranetSousSection/EmploiduTemps/emploidutemps";
+import Diplomes from "./IntranetSousSection/Diplomes/diplomes";
 
 const Intranet = () => {
   const [selectedComponent, setSelectedComponent] = useState("infoPersonnel");
@@ -65,6 +67,9 @@ const Intranet = () => {
     case "documents":
       componentToDisplay = <Documents />;
       break;
+      case "diplomes":
+        componentToDisplay = <Diplomes />;
+        break;
     case "evenements":
       componentToDisplay = <Event />;
       break;
@@ -79,7 +84,7 @@ const Intranet = () => {
         {/* Ajout de la classe show pour afficher la navigation sur les appareils mobiles */}
         <FaBars className="toggle-nav" onClick={() => setShowNav(!showNav)} />{" "}
         {/* Toggle pour afficher/cacher la navigation sur les appareils mobiles */}
-        <h2 className="nomPersMenu">Bonjour {Prénom} 😊 </h2>
+        <h2 className="nomPersMenu">Bonjour {Prénom} ! </h2>
         {/* Les éléments de navigation restent inchangés */}
         <div
           onClick={() => handleComponentChange("infoPersonnel")}
@@ -146,6 +151,15 @@ const Intranet = () => {
           >
             <FaCalendarAlt className="sub-nav-icon" />
             <span className="sub-nav-text">Événements</span>
+          </div>
+          <div
+            onClick={() => handleComponentChange("diplomes")}
+            className={`sub-nav-link ${
+              selectedComponent === "diplomes" && "active"
+            }`}
+          >
+            <FaGraduationCap className="sub-nav-icon" />
+            <span className="sub-nav-text">Remise de Diplomes</span>
           </div>
           <div onClick={handleLogout} className={`sub-nav-link`}>
             <FaSignOutAlt className="sub-nav-icon" />

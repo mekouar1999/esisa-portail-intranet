@@ -24,7 +24,7 @@ function ResetPassword() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios.post(
-      'https://esisa-portail-intranet-back.vercel.app/api/user/forgot-Password-Token', formData)
+     'https://esisa-portail-intranet-back.vercel.app/api/user/forgot-Password-Token', formData)
     // 'http://localhost:4000/api/user/forgot-Password-Token', formData)
 
       .then(response => {

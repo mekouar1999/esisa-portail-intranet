@@ -29,7 +29,6 @@ function InterfaceDeConnexion({ setIsLoggedIn }) {
 
         formData
       );
-      console.log("Response from server:", response);  
       // Après la vérification de l'identifiant et du mot de passe
       if (response.data && response.data.token) {
         setIsLoggedIn(true);
@@ -51,7 +50,6 @@ function InterfaceDeConnexion({ setIsLoggedIn }) {
 
         
 
-console.log("response data " , response.data)
         sessionStorage.setItem("isLoggedIn", true);
         navigate("/intranet");
       } else {

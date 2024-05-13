@@ -40,14 +40,15 @@ const EmploiDuTemps = () => {
         const token = sessionStorage.getItem('token');
         const cin = sessionStorage.getItem('cin');
         const response = await axios.get(
-          `https://esisa-portail-intranet-back.vercel.app/api/student/${cin}`,
+         `https://esisa-portail-intranet-back.vercel.app/api/student/${cin}`,
+       //   `http://localhost:4000/api/student/${cin}`,
+
           {
             headers: {
               Authorization: `Bearer ${token}`
             }
           }
         );
-        console.log("Réponse des relevés de notes de l'utilisateur :", response.data);
         // Assuming response.data.annee contains the expected value
         setDonneesRecues(response.data.annee);
         setLoading(false);
@@ -65,9 +66,6 @@ const EmploiDuTemps = () => {
   const groupe = sessionStorage.getItem('groupe');
   const annee = donneesRecues;
   
-  // Console pour vérifier le groupe et l'année
-  console.log("Groupe :", groupe);
-  console.log("Année :", annee);
 
   // Vérifier si le groupe et l'année sont définis
   if (!groupe || !annee) {
@@ -79,11 +77,10 @@ const EmploiDuTemps = () => {
   }
 // Vérifier si le groupe et l'année existent dans le JSON
 const anneeText = {
-  1: "1ère année",
-  2: "2ème année",
-  3: "3ème année",
-  4: "4ème année",
-  5: "5ème année"
+  1: "2ème année",
+  2: "3ème année",
+  3: "4ème année",
+  4: "5ème année",
 }[annee];
 
 const emploiAnnee = emploiDuTempsJSON[anneeText];
@@ -181,11 +178,12 @@ const handleDownloadPDF = () => {
       // Créer un objet jsPDF
       const pdf = new jsPDF('l', 'mm', 'a4'); // Landscape orientation
 
-      // Ajouter l'image capturée au PDF
-      const imgData = canvas.toDataURL('image/png');
-      const imgWidth = 210; // Largeur de la page A4 en mm
+      // Calculer les coordonnées x et y pour centrer l'image
+      const imgWidth = pdf.internal.pageSize.getWidth(); // Largeur de la page A4 en mm
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
-      pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+
+      // Ajouter l'image capturée au PDF
+      pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, imgWidth, imgHeight);
 
       // Télécharger le PDF
       pdf.save('emploi_du_temps.pdf');
@@ -194,6 +192,7 @@ const handleDownloadPDF = () => {
     console.error('Erreur: Impossible de trouver l\'élément contenant l\'image de l\'emploi du temps.');
   }
 };
+
 
   return (
     <Container className="edt-container">

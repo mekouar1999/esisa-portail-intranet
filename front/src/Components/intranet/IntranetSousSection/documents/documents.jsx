@@ -80,7 +80,6 @@ const Documents = () => {
         }
       );
 
-      console.log("Documents associés avec succès :", response.data);
     } catch (error) {
       console.error("Erreur lors de l'association des documents :", error.message);
     }
@@ -121,10 +120,10 @@ const Documents = () => {
         </p>
       </div>
 
-      <div className="upload-page-container">
-        <div className="file-inputs">
+      <div className="upload-page-container" >
+        <div className="file-inputs" >
           {Object.keys(files).map((fileType) => (
-            <div className="file-input" key={fileType}>
+            <div className="file-input" key={fileType} >
               <div className="divtitleDoc">
                 <label className="titleDoc">
                   {fileType === "releveBac"

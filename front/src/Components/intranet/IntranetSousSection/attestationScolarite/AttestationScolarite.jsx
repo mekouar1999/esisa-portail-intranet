@@ -9,11 +9,8 @@ import signature from "../../../../images/signature.png"; // Importez la signatu
 const AttestationScolarite = () => {
   const [loading, setLoading] = useState(false);
   const [responseError, setResponseError] = useState(null);
-
-
-    // State variables
-    const [relevesDeNotes, setRelevesDeNotes] = useState([]);
-    const [donneesRecues, setDonneesRecues] = useState({});
+  const [relevesDeNotes, setRelevesDeNotes] = useState([]);
+  const [donneesRecues, setDonneesRecues] = useState({});
 
   const fetchAndGeneratePDF = async () => {
     try {
@@ -22,29 +19,24 @@ const AttestationScolarite = () => {
       const Prénom = sessionStorage.getItem("Prénom");
       const Nom = sessionStorage.getItem("Nom");
       const Sexe = sessionStorage.getItem("Sexe");
-
-
       const groupe = sessionStorage.getItem("groupe");
-      const AnneeScolaireEnCours = sessionStorage.getItem("AnneeScolaireEnCours");
 
       const response = await axios.get(
-      //   `http://localhost:4000/api/user/${userId}`, 
-         `https://esisa-portail-intranet-back.vercel.app/api/user/${userId}`, 
+       // `http://localhost:4000/api/user/${userId}`
+        `https://esisa-portail-intranet-back.vercel.app/api/user/${userId}`
 
-        {
+        , {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
 
-      // Générer le PDF
       const doc = new jsPDF();
 
-      // Ajouter le logo ESISA centré avec la date
       const today = new Date();
       const date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
-      const imgWidth = 80; // Largeur de l'image
-      const imgHeight = 80; // Hauteur de l'image
+      const imgWidth = 50;
+      const imgHeight = 50;
       const margin = 10;
       const pageWidth = doc.internal.pageSize.getWidth();
       const pageHeight = doc.internal.pageSize.getHeight();
@@ -58,35 +50,28 @@ const AttestationScolarite = () => {
       doc.setFontSize(10);
       doc.text(`Fait à Fès, le : ${date}`, 150, 20);
 
-      // Contenu de l'attestation
       doc.setFont("helvetica", "normal");
       doc.setFontSize(12);
-    
-      // Texte d'attestation
-      doc.setFont("helvetica", "normal");
-      doc.setFontSize(12);
-   // Vérifie si le sexe est féminin
-if (Sexe === "F") {
-  doc.text(`J'atteste par la présente que Madame ${Nom} ${Prénom} est inscrite à l'École supérieure `, 20, 140);
-} else {
-  doc.text(`J'atteste par la présente que Monsieur ${Nom} ${Prénom} est inscrit à l'École supérieure `, 20, 140);
-}
 
-doc.text(`en ingénierie et en sciences appliquées (ESISA) pour l'année universitaire 2023/2024.`, 20, 150);
-doc.text(`L'étudiant${Sexe === "F" ? "e" : ""} ${Prénom} est inscrit${Sexe === "F" ? "e" : ""} en ${donneesRecues.annee}${donneesRecues.annee === "1" ? "ère" : "ème"} année, dans le groupe ${groupe}. `, 20, 160);
+      if (Sexe === "F") {
+        doc.text(`J'atteste par la présente que Madame ${Nom} ${Prénom} est inscrite à l'École supérieure `, 20, 140);
+      } else {
+        doc.text(`J'atteste par la présente que Monsieur ${Nom} ${Prénom} est inscrit à l'École supérieure `, 20, 140);
+      }
+
+      doc.text(`en ingénierie et en sciences appliquées (ESISA) pour l'année universitaire 2023/2024.`, 20, 150);
+      doc.text(`L'étudiant${Sexe === "F" ? "e" : ""} ${Prénom} est inscrit${Sexe === "F" ? "e" : ""} en ${parseInt(donneesRecues.annee) + 1}${donneesRecues.annee === "0" ? "ère" : "ème"} année, dans le groupe ${groupe}. `, 20, 160);
 
       doc.text("Cette attestation est conforme aux droits et règlements de l'ESISA.", 20, 170);
 
-      // Signature
       doc.setFont("helvetica", "bold");
       doc.text("Attesté par", 20, 210);
-      doc.line(20, 215, 100, 215); // Ligne de signature
+      doc.line(20, 215, 100, 215);
       doc.setFont("helvetica", "normal");
-      doc.text("Khalid Mekouar", 20, 225); // Nom du signataire
-      doc.text("Président et Directeur Pédagogique de l'ESISA", 20, 235); // Fonction du signataire
-      doc.addImage(signature, "PNG", 20, 235, 80, 40); // Ajoutez la signature en image
+      doc.text("Khalid Mekouar", 20, 225);
+      doc.text("Président et Directeur Pédagogique de l'ESISA", 20, 235);
+      doc.addImage(signature, "PNG", 20, 235, 80, 40);
 
-      // Sauvegarde du PDF dans un fichier
       doc.save("attestation_scolarite.pdf");
 
       setLoading(false);
@@ -100,22 +85,18 @@ doc.text(`L'étudiant${Sexe === "F" ? "e" : ""} ${Prénom} est inscrit${Sexe ===
   useEffect(() => {
     const fetchRelevesDeNotes = async () => {
       try {
-        const userId = sessionStorage.getItem("_id");
-        const Prénom = sessionStorage.getItem("Prénom");
-        const Nom = sessionStorage.getItem("Nom");
-        const groupe = sessionStorage.getItem("groupe");
-        const AnneeScolaireEnCours = sessionStorage.getItem("AnneeScolaireEnCours");
-        const token = sessionStorage.getItem('token');
         const cin = sessionStorage.getItem('cin');
+        const token = sessionStorage.getItem('token');
         const response = await axios.get(
+       //   `http://localhost:4000/api/student/${cin}`,
           `https://esisa-portail-intranet-back.vercel.app/api/student/${cin}`,
+
+          
           {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
+          headers: {
+            Authorization: `Bearer ${token}`
           }
-        );
-        console.log("Réponse des relevés de notes de l'utilisateur :", response.data);
+        });
         setDonneesRecues(response.data);
         setRelevesDeNotes(response.data.ESISA || []);
         setLoading(false);
@@ -129,9 +110,8 @@ doc.text(`L'étudiant${Sexe === "F" ? "e" : ""} ${Prénom} est inscrit${Sexe ===
     fetchRelevesDeNotes();
   }, []);
 
-
   const handleGeneratePDF = () => {
-    fetchAndGeneratePDF(); // Appeler la fonction de génération du PDF uniquement lors du clic sur le bouton
+    fetchAndGeneratePDF();
   };
 
   return (
@@ -147,17 +127,21 @@ doc.text(`L'étudiant${Sexe === "F" ? "e" : ""} ${Prénom} est inscrit${Sexe ===
       <p className="description">
         Vous pouvez télécharger votre attestation de scolarité pour l'année universitaire en cours en cliquant sur les liens ci-dessous :
       </p>
-      {/* Affichez le Spinner pendant le chargement */}
       {loading ? (
         <div className="spinner-container">
           <Spinner />
         </div>
       ) : (
         <div style={{ textAlign: "center", marginTop: "2rem" }} className="pdf-button-container">
+          <Button variant="contained" onClick={handleGeneratePDF} disabled>
+            Générer l'attestation de scolarité - Année universitaire 2022-2023
+          </Button>
+          <div style={{ textAlign: "center", marginTop: "2rem" }} className="pdf-button-container">
           <Button variant="contained" onClick={handleGeneratePDF}>
-            Générer l'attestation de scolarité
+            Générer l'attestation de scolarité -  Année universitaire 2023-2024
           </Button>
         </div>
+        </div> 
       )}
     </div>
   );
