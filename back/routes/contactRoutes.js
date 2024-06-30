@@ -46,7 +46,7 @@ router.post('/info', upload.none(), async (req, res) => {
     const mailOptions = {
       from: process.env.MAIL_ID,
       to: `${process.env.MAIL_ID}, ${email}`, // Send to both the receiver and the person who submitted the form
-      subject: `ESISA - Demande de Pré inscription #${counter}`,
+      subject: `ESISA - Demande de Pré inscription #${randomId}`,
       html: `
         <div style="font-family: Arial, sans-serif; color: #333; background-color: #f9f9f9; padding: 20px; border-radius: 8px;">
           <h4 style="color: #007bff; margin-bottom: 20px;">Demande de pré Inscription #${randomId}</h4>
@@ -81,8 +81,7 @@ router.post('/info', upload.none(), async (req, res) => {
     console.log('E-mail d\'information envoyé avec succès');
     res.status(200).send('Message d\'information envoyé avec succès.');
     
-    // Increment the counter
-    counter++;
+
   } catch (error) {
     console.error('Erreur lors de l\'envoi du message d\'information :', error.message);
     res.status(500).send('Erreur lors de l\'envoi du message d\'information : ' + error.message);
