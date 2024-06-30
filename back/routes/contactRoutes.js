@@ -56,6 +56,11 @@ router.post('/info', upload.none(), async (req, res) => {
           Nous vous remercions de votre demande. Celle-ci sera examinée par le directeur pédagogique. 
           Conformément aux normes universitaires de rigueur, nous nous engageons à vous fournir une réponse par rapport à votre demande dans un délai de 48 heures. 
       </h6>
+
+
+      <h6 style="color: #007bff; text-align:center;  margin-top: 50px; margin-bottom: 20px;">
+      COPYRIGHT © 2024 ESISA - TOUS DROITS RÉSERVÉS
+  </h6>
         </div>
       `,
     };
