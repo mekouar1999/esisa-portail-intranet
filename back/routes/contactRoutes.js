@@ -3,14 +3,15 @@ const router = express.Router();
 const nodemailer = require("nodemailer");
 
 
-router.post('/info', async (req, res) => {
+
+router.post('/contact/info', async (req, res) => {
   try {
     const { nom, prenom, email, tel, baccalaureat, filiere, maths } = req.body;
 
-    // Vérification des champs requis
-    if (!nom || !prenom || !email || !tel || !baccalaureat || !filiere || !maths) {
-      throw new Error('Veuillez remplir tous les champs obligatoires.');
-    }
+    // // Vérification des champs requis
+    // if (!nom || !prenom || !email || !tel || !baccalaureat || !filiere || !maths) {
+    //   throw new Error('Veuillez remplir tous les champs obligatoires.');
+    // }
 
     // Configuration du transporteur nodemailer
     const transporter = nodemailer.createTransport({
@@ -23,8 +24,8 @@ router.post('/info', async (req, res) => {
 
     const mailOptions = {
       from: process.env.MAIL_ID,
-      to: process.env.MAIL_ID, // Remplacez par votre adresse e-mail de réception des messages
-      subject: 'Nouveau message d\'information', // Sujet du message
+      to: process.env.MAIL_ID,
+      subject: 'Nouvelle demande de pré inscription !',
       html: `
         <div style="font-family: Arial, sans-serif; color: #333; background-color: #f9f9f9; padding: 20px; border-radius: 8px;">
           <h2 style="color: #007bff; margin-bottom: 20px;">Nouveau message d'information</h2>
@@ -50,7 +51,6 @@ router.post('/info', async (req, res) => {
     res.status(500).send('Erreur lors de l\'envoi du message d\'information : ' + error.message);
   }
 });
-
 
 router.post("/", async (req, res) => {
   try {
