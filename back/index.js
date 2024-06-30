@@ -23,18 +23,20 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 // V
 app.use(morgan("dev"));
 app.use(cookieParser());
-app.use(cors({
-  origin: '*',
-  credentials: true
-}));
+// app.use(cors({
+//   origin: '*',
+//   credentials: true
+// }));
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://esisa-remisededeiplomes.vercel.app');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Credentials', 'true');
-  next();
-});
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', 'https://esisa-remisededeiplomes.vercel.app');
+//   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+//   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+//   res.header('Access-Control-Allow-Credentials', 'true');
+//   next();
+// });
+
+app.use(cors());  // Allow CORS requests
 
 
 app.use(express.json());
