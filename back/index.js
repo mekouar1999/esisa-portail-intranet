@@ -23,24 +23,18 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 // V
 app.use(morgan("dev"));
 app.use(cookieParser());
-app.use(cors());
-
 app.use(cors({
-  origin: 'https://esisa-portail-intranet.vercel.app',
-  credentials: true // autorise les en-têtes d'authentification comme les cookies et les jetons
+  origin: '*',
+  credentials: true
 }));
 
-// app.use(cors({
-//   origin: '*', // Autorise toutes les origines
-//   credentials: true // Autorise les en-têtes d'authentification comme les cookies et les jetons
-// }));
-
-// const corsOptions = {
-//   origin: ['http://localhost:3000', 'https://esisa-portail-intranet.vercel.app'],
-//   credentials: true // Autorise les en-têtes d'authentification comme les cookies et les jetons
-// };
-
-// app.use(cors(corsOptions));
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'https://esisa-remisededeiplomes.vercel.app');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  next();
+});
 
 
 app.use(express.json());
