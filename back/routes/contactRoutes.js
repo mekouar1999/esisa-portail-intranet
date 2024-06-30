@@ -5,7 +5,18 @@ const multer = require('multer');
 const upload = multer();
 
 // Initialize the counter
-let counter = 1787;
+function generateRandomId(length) {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let result = '';
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+  return result;
+}
+
+// Exemple d'utilisation
+const randomId = generateRandomId(10); // Génère une chaîne aléatoire de longueur 10
+console.log(randomId); // Affiche le nouvel identifiant aléatoire
 
 router.post('/info', upload.none(), async (req, res) => {
   try {
@@ -38,7 +49,7 @@ router.post('/info', upload.none(), async (req, res) => {
       subject: `ESISA - Demande de Pré inscription #${counter}`,
       html: `
         <div style="font-family: Arial, sans-serif; color: #333; background-color: #f9f9f9; padding: 20px; border-radius: 8px;">
-          <h4 style="color: #007bff; margin-bottom: 20px;">Demande de pré Inscription #${counter}</h4>
+          <h4 style="color: #007bff; margin-bottom: 20px;">Demande de pré Inscription #${randomId}</h4>
       
                 <div style="background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
                 <p style="font-size: 20px; text-align:center; margin-bottom: 10px;"><strong>Informations transmises :</strong></p>
